@@ -1,7 +1,8 @@
+//https://www.youtube.com/watch?v=L9Ite-1pEU8
 pipeline {
    agent any 
    stages{
-      stage("run frontedn"){
+      stage("run frontend"){
        steps{
          echo 'executing yarn ..'
          nodejs('node-17.1.0'){
