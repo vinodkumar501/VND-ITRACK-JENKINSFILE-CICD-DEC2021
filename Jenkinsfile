@@ -12,16 +12,16 @@ pipeline {
              sh 'yarn install'
              sh 'npm config ls'
              sh 'npm -version'
+             sh 'node -version'
+             sh 'yarn -version'
          }
        }
     }
       stage("run backend"){
        steps{
          echo 'executing graddle'
-         //sh 'gradle wrapper'
-         //sh 'chmod +x ./gradlew'
-         //sh './gradlew -v'  
          sh 'gradle init'
+         sh 'gradle -version'
          sh 'gradle clean build'
          //https://docs.gradle.org/current/userguide/jenkins.html
          }
