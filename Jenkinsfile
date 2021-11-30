@@ -2,14 +2,14 @@
 pipeline {
    agent any 
    tools {
-       gradle('gradle-7')  
+       gradle('gradle-7')     //gradle-7 is the name we mentioned in automatic gradle installation
    }
    stages{
-      stage("run frontend"){
+      stage("run frontend"){     //stage any have to provide
        steps{
          echo 'executing yarn ..'
-         nodejs('node-17.1.0'){
-             sh 'yarn install'
+         nodejs('node-17.1.0'){    //node-17.1.0 is the name we mentioned in automatic node installation install nodejs plugin
+             sh 'yarn install'     
              sh 'npm config ls'
              sh 'npm -version'
              sh 'node --version'
