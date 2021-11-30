@@ -12,7 +12,7 @@ pipeline {
              sh 'yarn install'
              sh 'npm config ls'
              sh 'npm -version'
-             sh 'node -version'
+             sh 'node --version'
              sh 'yarn -version'
          }
        }
