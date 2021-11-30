@@ -1,0 +1,135 @@
+Started by user vinod kumar
+Obtained Jenkinsfile from git https://github.com/vinodkumar501/jenkins-example.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Jenkins-basic-pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Jenkins-basic-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/vinodkumar501/jenkins-example.git # timeout=10
+Fetching upstream changes from https://github.com/vinodkumar501/jenkins-example.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.32.0'
+ > git fetch --tags --force --progress -- https://github.com/vinodkumar501/jenkins-example.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/master^{commit} # timeout=10
+Checking out Revision cd97fc66314cec5f4ecee4bb0752d3c76870bd3a (origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f cd97fc66314cec5f4ecee4bb0752d3c76870bd3a # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk 4ff0b985699f3d6bc5e0237dc993411d416ccdb9 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Tool Install)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (run frontend)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+executing yarn ..
+[Pipeline] nodejs
+[Pipeline] {
+[Pipeline] sh
++ yarn install
+yarn install v1.13.0
+[1/4] Resolving packages...
+success Already up-to-date.
+Done in 0.04s.
+[Pipeline] sh
++ npm config ls
+; node bin location = /var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/node-17.1.0/bin/node
+; cwd = /var/lib/jenkins/workspace/Jenkins-basic-pipeline
+; HOME = /var/lib/jenkins
+; Run `npm config ls -l` to show all defaults.
+[Pipeline] sh
++ npm -version
+8.1.2
+[Pipeline] sh
++ node --version
+v17.1.0
+[Pipeline] sh
++ yarn -version
+1.13.0
+[Pipeline] }
+[Pipeline] // nodejs
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (run backend)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+executing graddle
+[Pipeline] sh
++ gradle init
+Starting a Gradle Daemon (subsequent builds will be faster)
+
+> Task :init SKIPPED
+The build file 'build.gradle' already exists. Skipping build initialization.
+
+BUILD SUCCESSFUL in 10s
+[Pipeline] sh
++ gradle -version
+
+------------------------------------------------------------
+Gradle 7.3
+------------------------------------------------------------
+
+Build time:   2021-11-09 20:40:36 UTC
+Revision:     96754b8c44399658178a768ac764d727c2addb37
+
+Kotlin:       1.5.31
+Groovy:       3.0.9
+Ant:          Apache Ant(TM) version 1.10.11 compiled on July 10 2021
+JVM:          1.8.0_302 (Red Hat, Inc. 25.302-b08)
+OS:           Linux 5.10.75-79.358.amzn2.x86_64 amd64
+
+[Pipeline] sh
++ gradle clean build
+> Task :clean
+> Task :compileJava
+> Task :processResources NO-SOURCE
+> Task :classes
+> Task :jar
+> Task :assemble
+> Task :compileTestJava
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+> Task :test
+> Task :check
+> Task :build
+
+BUILD SUCCESSFUL in 5s
+5 actionable tasks: 5 executed
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
