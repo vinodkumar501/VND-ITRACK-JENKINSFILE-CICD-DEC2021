@@ -14,10 +14,10 @@ pipeline {
              sh 'npm -version'
              sh 'node --version'
              sh 'yarn -version'
-         }
-       }
-     }
-   }
+            }
+          }
+        }
+      }
       stage("run backend"){
        steps{
          echo 'executing graddle'
@@ -29,5 +29,5 @@ pipeline {
          //http://tutorials.jenkov.com/gradle/run-gradle.html//gradle commands
          }
       }
-    }
+   }
  
