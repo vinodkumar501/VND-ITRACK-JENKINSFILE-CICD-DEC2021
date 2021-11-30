@@ -3,7 +3,6 @@ pipeline {
    agent any 
    tools {
        gradle('gradle-7')     //gradle-7 is the name we mentioned in automatic gradle installation
-       nodejs
    }
    stages{
       stage("run frontend"){     //stage any have to provide
