@@ -1,9 +1,9 @@
 //https://www.youtube.com/watch?v=L9Ite-1pEU8
 pipeline {
    agent any 
-   tools {
-       gradle('gradle-7')  
-   }
+   //tools {
+       //gradle('gradle-7')  
+   //}
    stages{
       stage("run frontend"){
        steps{
