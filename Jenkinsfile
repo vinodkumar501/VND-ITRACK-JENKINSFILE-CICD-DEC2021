@@ -9,14 +9,14 @@ pipeline {
        steps{
          echo 'executing yarn ..'
          nodejs('node-17.1.0'){    //node-17.1.0 is the name we mentioned in automatic node installation install nodejs plugin
-             sh 'yarn install'     
-             sh 'npm config ls'
-             sh 'npm -version'
-             sh 'node --version'
-             sh 'yarn -version'
-            }
-          }
-        }
+         sh 'yarn install'     
+         sh 'npm config ls'
+         sh 'npm -version'
+         sh 'node --version'
+         sh 'yarn -version'
+         }
+       }
+      }
       stage("run backend"){
        steps{
          echo 'executing graddle'
