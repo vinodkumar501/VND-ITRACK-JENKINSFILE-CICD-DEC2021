@@ -24,6 +24,7 @@ pipeline {
          sh 'gradle -version'
          sh 'gradle clean build'
          //https://docs.gradle.org/current/userguide/jenkins.html
+         //http://tutorials.jenkov.com/gradle/run-gradle.html//gradle commands
          }
       }
     }
