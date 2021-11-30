@@ -7,6 +7,7 @@ pipeline {
          nodejs('node-17.1.0'){
              sh 'yarn install'
              sh 'npm config ls'
+             sh 'npm -version'
          }
        }
     }
