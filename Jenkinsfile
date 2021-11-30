@@ -5,12 +5,12 @@ pipeline {
    tools {
        gradle('gradle-7')     //gradle-7 is the name we mentioned in automatic gradle installation
    }
-   stages{
-      stage("cloning git repository"){
-       steps{
-         git 'https://github.com/vinodkumar501/itrack-jenkinsfile-learning-repo.git'
-        }
-      }  
+   //stages{                                                //by default it clone git repo so donot need to mention explicitly
+      //stage("cloning git repository"){
+       //steps{
+         //git 'https://github.com/vinodkumar501/itrack-jenkinsfile-learning-repo.git'
+        //}
+      //}  
       stage("run frontend"){     //stage any have to provide
        steps{
          echo 'executing yarn ..'
