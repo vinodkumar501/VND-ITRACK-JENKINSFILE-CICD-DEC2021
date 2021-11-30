@@ -21,6 +21,7 @@ pipeline {
          //sh 'gradle wrapper'
          //sh 'chmod +x ./gradlew'
          //sh './gradlew -v'  
+         sh 'gradle init'
          sh 'gradle clean build'
          //https://docs.gradle.org/current/userguide/jenkins.html
          }
