@@ -1,5 +1,8 @@
 pipeline {
    agent any 
+   tools {
+     gradle 'gradle-7.3'  
+   }
    stages{
       stage("run frontedn"){
        steps{
@@ -14,8 +17,7 @@ pipeline {
       stage("run backend"){
        steps{
          echo 'executing graddle'
-         withGradle(){
-         sh 'gradle wrapper'
+         //sh 'gradle wrapper'
          sh 'chmod +x ./gradlew'
          sh './gradlew -v'  
          //https://docs.gradle.org/current/userguide/jenkins.html
