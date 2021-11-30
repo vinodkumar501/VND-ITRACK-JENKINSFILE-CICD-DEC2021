@@ -1,8 +1,5 @@
 pipeline {
    agent any 
-   tools {
-     gradle 'gradle-7.3'  
-   }
    stages{
       stage("run frontedn"){
        steps{
