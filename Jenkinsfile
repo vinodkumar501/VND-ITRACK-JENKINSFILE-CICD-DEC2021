@@ -14,7 +14,8 @@ pipeline {
       stage("run backend"){
        steps{
          echo 'executing graddle'
-          withGradle(){
+         withGradle(){
+         sh 'chmod +x ./gradlew'
          sh './gradlew -v'  
          //https://docs.gradle.org/current/userguide/jenkins.html
          }
