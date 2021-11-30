@@ -69,7 +69,9 @@ name : mvn-1.8
 select install automatically and tick version: 3.8.4
 and save
 
---------------->you need to mention maven in jenkinsfile<-----------------
+you need to mention maven tool details in jenkinsfile
+
+--------------->Jenkinsfile<-----------------
 pipeline {
     agent any
     tools {
