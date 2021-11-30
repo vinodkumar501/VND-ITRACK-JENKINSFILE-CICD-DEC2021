@@ -16,8 +16,9 @@ pipeline {
        steps{
          echo 'executing graddle'
          //sh 'gradle wrapper'
-         sh 'chmod +x ./gradlew'
-         sh './gradlew -v'  
+         //sh 'chmod +x ./gradlew'
+         //sh './gradlew -v'  
+         sh 'gradle clean build'
          //https://docs.gradle.org/current/userguide/jenkins.html
          }
       }
