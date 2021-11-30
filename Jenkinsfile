@@ -6,6 +6,11 @@ pipeline {
        gradle('gradle-7')     //gradle-7 is the name we mentioned in automatic gradle installation
    }
    stages{
+      stage("cloning git repository"){
+       steps{
+         git 'https://github.com/vinodkumar501/itrack-jenkinsfile-learning-repo.git'
+        }
+      }  
       stage("run frontend"){     //stage any have to provide
        steps{
          echo 'executing yarn ..'
@@ -15,8 +20,8 @@ pipeline {
          sh 'npm -version'
          sh 'node --version'
          sh 'yarn -version'
-         }
-       }
+          }
+        }
       }
       stage("run backend"){
        steps{
