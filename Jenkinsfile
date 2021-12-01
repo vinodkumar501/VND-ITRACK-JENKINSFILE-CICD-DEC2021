@@ -13,7 +13,7 @@ node {
 
     stage('npm install') {
         nodejs('node'){
-        sh "npm init"
+        //sh "npm init"
         sh "npm install yarn"
         }
       }
