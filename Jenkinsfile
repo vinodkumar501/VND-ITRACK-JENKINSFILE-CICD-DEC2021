@@ -25,4 +25,5 @@ node {
     stage('protractor tests') {
         sh "npm run e2e"
     }
+  }  
 }
