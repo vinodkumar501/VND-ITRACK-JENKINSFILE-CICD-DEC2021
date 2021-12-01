@@ -18,11 +18,11 @@ node {
         }
       }
 
-    stage('unit tests') {
-        sh "npm test -- --watch=false"
-    }
+    //stage('unit tests') {
+        //sh "npm test -- --watch=false"
+    //}
 
-    stage('protractor tests') {
-        sh "npm run e2e"
-    }
-  }  
+    //stage('protractor tests') {
+        //sh "npm run e2e"
+    //}
+}  
