@@ -14,7 +14,7 @@ node {
     stage('npm install') {
         nodejs('node-17.1.0'){
         sh "npm init"
-        sh "npm install"
+        sh "npm install yarn"
         }
       }
 
