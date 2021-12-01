@@ -1,5 +1,6 @@
 //https://www.youtube.com/watch?v=L9Ite-1pEU8
 //https://medium.com/@gustavo.guss/jenkins-starting-with-pipeline-doing-a-node-js-test-72c6057b67d4
+//https://medium.com/appgambit/ci-cd-pipeline-for-a-nodejs-application-with-jenkins-fa3cc7fad13a
 pipeline {
    agent any 
    tools {
