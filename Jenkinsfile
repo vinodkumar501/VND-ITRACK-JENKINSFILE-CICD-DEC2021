@@ -25,4 +25,3 @@ node {
         sh "npm run e2e"
     }
   }  
-}
