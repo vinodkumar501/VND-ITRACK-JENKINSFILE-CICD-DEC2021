@@ -5,8 +5,8 @@ pipeline {
    tools {
        gradle('gradle-7')     //gradle-7 is the name we mentioned in automatic gradle installation
    }
-   stages{                                                //by default it clone git repo so donot need to mention explicitly
-      //stage("cloning git repository"){
+   stages{                                                
+      //stage("cloning git repository"){           ////by default it clone git repo so donot need to mention explicitly
        //steps{
          //git 'https://github.com/vinodkumar501/itrack-jenkinsfile-learning-repo.git'
         //}
