@@ -12,8 +12,11 @@ node {
     }
 
     stage('npm install') {
+      steps{
+        nodejs('node-17.1.0'){
         sh "npm install"
-    }
+        }
+      }
 
     stage('unit tests') {
         sh "npm test -- --watch=false"
