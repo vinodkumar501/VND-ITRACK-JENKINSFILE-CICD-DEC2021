@@ -1,3 +1,8 @@
+//https://www.youtube.com/watch?v=L9Ite-1pEU8
+//https://medium.com/@gustavo.guss/jenkins-starting-with-pipeline-doing-a-node-js-test-72c6057b67d4
+//https://medium.com/appgambit/ci-cd-pipeline-for-a-nodejs-application-with-jenkins-fa3cc7fad13a
+//https://www.blazemeter.com/blog/how-to-use-the-jenkins-scripted-pipeline
+
 https://plugins.jenkins.io/nodejs/
 
 Pipeline
