@@ -73,7 +73,7 @@ Jenkins.instance.getDescriptor(NodeJSInstallation).with {
 }
 
 
-------------------------------------------------
+------------------------------------------------ Pipeline ------------------------------------
 
 Jenkins Declarative Pipeline
  
@@ -126,3 +126,5 @@ The script has the elements “pipeline”, “agent” and “steps” which ar
 “Pipeline” defines the block that will contain all the script content.
 “Agent” defines where the pipeline will be run, similar to the “node” for the scripted one.
 “Stages” contains all of the stages.
+
+https://www.jenkins.io/doc/book/pipeline/
