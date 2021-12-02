@@ -8,7 +8,7 @@ pipeline{
 	 }
     stage('build'){
 	  steps{
-	    echo 'running ${env.BUILD_NUMBER} and job ${env.JOB_NAME}'
+	    echo "running ${env.BUILD_NUMBER} and job ${env.JOB_NAME}"
 	   }
 	 }
 	}
