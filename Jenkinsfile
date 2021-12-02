@@ -8,13 +8,13 @@ pipeline{
 	 }
     stage('build'){
 	  steps{
-	    echo "running ${env.BUILD_NUMBER} and job ${env.JOB_NAME}" 
+	    echo "running ${env.BUILD_NUMBER} and job ${env.JOB_NAME}"   
 		 }
 	    }
      }
 }
 
-
+//o/p -->running 98 and job Jenkins-basic-pipeline
 //echo 'running ${env.BUILD_NUMBER} and job ${env.JOB_NAME}'  -->print o/p -->running ${env.BUILD_NUMBER} and job ${env.JOB_NAME}
 //Single quotes won't allow substitution. Try double quotes, escaping the dollar sign:
 //https://stackoverflow.com/questions/60648171/unable-to-substitute-jenkins-build-number-variable-in-pipeline-script
