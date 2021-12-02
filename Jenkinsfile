@@ -9,7 +9,7 @@ pipeline{
   stages{
     stage('build'){
 	  steps{
-	    echo 'running ${BUILD_NUMBER} and job ${JOB_NAME}
+	    echo 'running ${BUILD_NUMBER} and job ${JOB_NAME}'
 	   }
 	 }
 	}
