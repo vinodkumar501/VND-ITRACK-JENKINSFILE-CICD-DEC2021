@@ -1,0 +1,22 @@
+Jenkinsfile (Scripted Pipeline)
+
+start with node and not have stages like declarative
+having only stage
+
+//https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
+
+node {
+    checkout scm 
+    /* .. snip .. */
+}
+
+
+--------------------- scripted pipeline1 ----------------------
+
+node{
+  stage ('checkout')
+  checkout scm
+ }
+  
+//The checkout step will checkout code from source control; 
+//scm is a special variable which instructs the checkout step to clone the specific revision which triggered this Pipeline run
