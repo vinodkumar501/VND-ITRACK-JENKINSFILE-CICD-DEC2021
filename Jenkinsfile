@@ -5,12 +5,12 @@
     //revision which triggered this Pipeline run
 //}
 pipeline{
-   agent any 
-   stages{
-     stage('build'){
-	   steps{
-	     sh 'make'
-		 }
-		}
+  node any
+  stages{
+    stage('build'){
+	  steps{
+	    echo 'running ${BUILD_NUMBER} and job ${JOB_NAME}
+	   }
+	 }
 	}
 }
