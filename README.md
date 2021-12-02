@@ -140,11 +140,12 @@ pipeline{
   stages{
     stage('build'){
 	  steps{
-	    echo 'running ${BUILD_NUMBER} and job ${JOB_NAME}'
+	    echo 'running ${env.BUILD_NUMBER} and job ${env.JOB_NAME}'
 	   }
 	 }
 	}
 }
+
 
 
 
