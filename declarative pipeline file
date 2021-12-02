@@ -1,3 +1,22 @@
+
+==================>scripted  pipeline
+
+start with node {
+//
+}
+
+===================>declarative  pipeline
+
+start with pipeline and have stages
+
+pipeline{
+  agent any 
+  //
+  }
+  
+------------------------- Declarative sample file --------------------------
+
+
 pipeline {
     agent any
 
