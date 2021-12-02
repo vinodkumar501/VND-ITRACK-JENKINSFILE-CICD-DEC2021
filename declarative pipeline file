@@ -58,3 +58,7 @@ pipeline{
 	    }
      }
 }
+
+
+Note:
+Declarative Pipeline supports an environment directive, whereas users of Scripted Pipeline must use the withEnv step.
