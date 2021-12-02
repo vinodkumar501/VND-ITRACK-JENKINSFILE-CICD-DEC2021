@@ -5,7 +5,7 @@
     //revision which triggered this Pipeline run
 //}
 pipeline{
-  node any
+  agent any
   stages{
     stage('build'){
 	  steps{
