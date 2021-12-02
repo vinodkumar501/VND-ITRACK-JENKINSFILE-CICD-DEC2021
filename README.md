@@ -105,7 +105,7 @@ On the other hand, a declarative pipeline can be written by using more elements,
 pipeline {
 	agent any 
 	stages {
-stage(‘Build’) {
+        stage(‘Build’) {
 	steps {
 		//…
 	}
@@ -128,3 +128,30 @@ The script has the elements “pipeline”, “agent” and “steps” which ar
 “Stages” contains all of the stages.
 
 https://www.jenkins.io/doc/book/pipeline/
+
+
+
+=============================== environment variable ==================================
+
+Jenkins Pipeline exposes environment variables via the global variable env, which is available from anywhere within a Jenkinsfile. The full list of environment variables accessible from within Jenkins Pipeline is documented at ${YOUR_JENKINS_URL}/pipeline-syntax/globals#env and includes
+
+pipeline{
+  agent any
+  stages{
+    stage('build'){
+	  steps{
+	    echo 'running ${BUILD_NUMBER} and job ${JOB_NAME}'
+	   }
+	 }
+	}
+}
+
+
+
+
+
+
+
+
+
+
