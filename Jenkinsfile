@@ -9,8 +9,13 @@ pipeline{
   stages{
     stage('build'){
 	  steps{
-	    echo 'running ${env.BUILD_NUMBER} and job ${env.JOB_NAME}'
+	    sh 'printenv'
 	   }
 	 }
 	}
 }
+
+//Setting environment variables
+//Setting an environment variable within a Jenkins Pipeline is accomplished differently depending on whether Declarative or Scripted Pipeline is used.
+
+//Declarative Pipeline supports an environment directive, whereas users of Scripted Pipeline must use the withEnv step.
