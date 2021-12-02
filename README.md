@@ -71,3 +71,58 @@ Jenkins.instance.getDescriptor(NodeJSInstallation).with {
         ])
     }  as NodeJSInstallation[]
 }
+
+
+------------------------------------------------
+
+Jenkins Declarative Pipeline
+ 
+
+One of the latests Pipeline improvements is the Jenkins Declarative Pipeline, which is a bit different than the Scripted Pipeline that we have been discussing. Both are implementations of the pipeline as code, but the Declarative way is designed to make it easier to develop and maintain your code by providing a more meaningful syntax. These two enhancements are achieved by adding syntax elements allowing you to define a different pipeline skeleton.
+
+ 
+
+Basically, a scripted pipeline has the following skeleton:
+
+ 
+
+ 
+
+node {
+	stage (‘Build’ {
+		//...
+	}
+	stage (‘Test’) {
+		//...
+	}
+}
+ 
+
+On the other hand, a declarative pipeline can be written by using more elements, as shown next:
+
+ 
+
+pipeline {
+	agent any 
+	stages {
+stage(‘Build’) {
+	steps {
+		//…
+	}
+	}
+	stage (‘Test’) {
+	steps {
+		//…
+	}
+	}
+}
+}
+ 
+
+ 
+
+The script has the elements “pipeline”, “agent” and “steps” which are specific to Declarative Pipeline syntax; “stage” is common to both Declarative and Scripted; and finally, node” is specific for the Scripted one.
+
+“Pipeline” defines the block that will contain all the script content.
+“Agent” defines where the pipeline will be run, similar to the “node” for the scripted one.
+“Stages” contains all of the stages.
