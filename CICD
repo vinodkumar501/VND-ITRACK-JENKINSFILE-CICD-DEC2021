@@ -1,1 +1,100 @@
+https://www.youtube.com/watch?v=k2aNsQKwyOo
+WHAT IS CI?
+CI is a process where team members continuouslu integrate the work continuously in a shared repo
+
+best achieved using some scm tools like GIT
+
+can be daily or as needed every integration or checkin in the repo is validated by automated build or unit test or integration tests
+
+Dev ---> test ----> deploy
+
+CD?
+continuous delivery
+
+After CI process and running automation tests to ensure the build is ready for the release
+ensure the build is deployable state
+
+STAGING:
+pre-prod or production ready replica env
+
+Dev   --> test ---> staging --------Prod
+------CD(delivery)------->
+---CI------>
+------------------------------------>(CD(deployment))
+
+all these processes will automatically trigger called CI/CD pipeline.
+
+CONTINUOUS DEPLOYMENT:
+---------------------
+CI and CD(delivery)
+
+Automated deployment to prod
+Every change that passed through automation tests is deployed to production
+
+BUT this may not be used or practical in most organisatins , they donot have frequent or sooshort releases.
+like FB Continuous frequent or short Deployment will use 
+every deployment will pass through all stages it directly deploy to prod env ----> Deployment
+
+what is CI?
+place where multiple team members can integrate their work and stored in a shared repo and some testcases 
+
+what is CD?
+CI to staging like 
+( after CD our code will be ready for productin ready code)
+
+What is Deployment (CI)?
+From CI to till prod
+
+
+----------------------------------------------CICD Pipeline------------------------------------------------
+https://www.youtube.com/watch?v=m0a2CzgLNsc
+
+Devops?
+Devops is software development approach which involves continuous development, build,integration, test,deploy and monitoring throughout the lifecycle.
+
+Devops stages:
+
+1.Version control : (SCM)
+manage different version of source code
+
+2.CI ( jenkins ): (continuous build )
+building appn code continuously
+Scenario:
+Dev makes changes code CI server will pull the code and build the code ( not compile )
+build not just compiling: build means validate, compile ,codereview ,build and unit(individual part) and integration(how different parts work together) testing 
+
+3.Continuous Delivery:( cont testing)
+Deploying build appn to test server and perform UAT ( staging area)
+
+4.Cont Deploy:
+deploy the tested appn code on to prod env
+
+CI ----> SDLC
+
+CI& CD
+--> version control --> build(compile) --> unittest --> Deploy( stage area) -->auto test ( sanity test)--> Deploy to prod --> prod feedback
+
+unit test:
+breack complete s/w into small chunks
+
+Integration test:
+all these individual tested parts will check working proper or eachother or not
+
+Pipeline:
+logical or series of steps how sdlc will occur.
+
+CICD: code will deliver shorter time to market
+
+mvn install:
+install all dependencies required to compile the appn
+once all done then docker will deploy, once appn will process all tests successfully then use docker deploy it.
+
+
+
+
+
+
+
+
+
 
