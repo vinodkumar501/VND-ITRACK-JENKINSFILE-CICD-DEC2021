@@ -89,7 +89,41 @@ mvn install:
 install all dependencies required to compile the appn
 once all done then docker will deploy, once appn will process all tests successfully then use docker deploy it.
 
+-------------------------- https://www.youtube.com/watch?v=HjXTSbXG1k8 --------------------------------
+https://www.youtube.com/watch?v=HjXTSbXG1k8
 
+INTEGRATION:
+pushing code and perform test
+
+Delivery:
+making available for deployment ( production ready code )
+
+cont Deployment:
+When you commit your code after automation test it automatically goes to production when sth wrong you are in trouble.
+not every company do Cont Deployment so few only do this, mostly company go for CI 
+
+eg: facebook
+
+Dev(commit) --->github --->build&automation test --->production ( manual deploy)
+
+SDLC tools:
+Git, Jenkins, Maven, Gradle, Sonarqube, JIRA 
+
+
+DEVOPS:
+Responsible for build code and deploy and basic testing (validation) once its done, approve they can share build code to qa for rest of testing.
+
+deployment: create build from code
+
+CI:  (Build + test)
+Devlop the code + build + test 
+Qa ---> Dev
+
+Cont delivery: (release)
+Enhancement to CI , build is done test is done ---> release that build to customer
+
+CICD--> Build + test +release
+https://www.youtube.com/watch?v=1ji_9scA2C4
 
 
 
