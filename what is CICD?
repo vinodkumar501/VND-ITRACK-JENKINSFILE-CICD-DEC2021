@@ -125,8 +125,81 @@ Enhancement to CI , build is done test is done ---> release that build to custom
 CICD--> Build + test +release
 https://www.youtube.com/watch?v=1ji_9scA2C4
 
+CICD?
+Dev will write code and store in shared repo (SCM) github from there jenkins will take code build and do basic testing -----> CI
+once basic test is done qa team will take build and do some more tests and all done they deploy to prod.
 
 
+---------------------------------------------------- PIPELINE:----------------------------------------------------
+
+Execute multiple jobs in sequence manner
+
+Dev --> commit --> build --> test -->stage --> Deploy dev/qa --> prod
+-------------------------->CICD <--------------------------
+
+build pipeline plugin ---> useful for few jobs (each task we need to create job )and integrate all
+but it useful for few jobs only. so jenkinsfile use
+
+Jenkinsfile: ( prefer for more no of jobs are there )
+1.Declarative pipeline:
+if I create file using groovy script that file is called  jenkinsfile that file will be there in central repo, that file run in jenkins ----> declarative jenkinsfile
+
+2.Scripted pipeline: groovy:
+just write small groovy script inside jenkins directly.
+
+pipeline: is a job inside each and everything like subjob
+https://www.jenkins.io/doc/book/pipeline/syntax/
+
+STEP:
+most fundamental part of a Pipeline is the "step". Basically, steps tell Jenkins what to do and serve as the basic building block for both Declarative 
+and Scripted Pipeline syntax.
+
+========================================== Declarative Pipeline ========================================== 
+Declarative Pipeline is a relatively recent addition to Jenkins Pipeline [1] which presents a more simplified and opinionated syntax on top of the Pipeline sub-systems.
+
+All valid Declarative Pipelines must be enclosed within a pipeline block, for example:
+
+pipeline {
+    /* insert Declarative Pipeline here */
+}
+
+The top-level of the Pipeline must be a block, specifically: pipeline { }.
+
+Limitations
+There is currently an open issue which limits the maximum size of the code within the pipeline{} block. This limitation does not apply to Scripted pipelines
+
+agent:
+The agent section specifies where the entire Pipeline, or a specific stage, will execute in the Jenkins environment depending on where the agent section is placed.
+The section must be defined at the top-level inside the pipeline block, but stage-level usage is optional.
+
+Parameters
+In order to support the wide variety of use-cases Pipeline authors may have, the agent section supports a few different types of parameters. These parameters can be applied at the top-level of the pipeline block, or within each stage directive.
+
+-> any
+Execute the Pipeline, or stage, on any available agent. For example: agent any
+
+pipeline{
+agent any 
+}
+
+-> label
+A string. The label or label condition on which to run the Pipeline or individual stage.
+
+This option is valid for node, docker, and dockerfile, and is required for node.
+
+PIPELINE:
+We can execute multiple jobs in sequential manner ---> all include in Jenkinsfile
+
+If your jobs are increasing it make much complex to add in build pipeline plugin so use Jenkinsfile ( in groovy script)
+every job consider as stage --- in jenkinsfile
+Just need to define all in script will run one after another ----> this approach is involved if more no of activitise or jobs involved.
+
+Single pipeline ---> all we included all job 
+pipline as job ---> inside are subjobs
+
+
+DECLARATIVE:
+If create a script( jenkinsfile) then that file in central repo along with project that file and run it in jenkins -----Declarative pipeline
 
 
 
