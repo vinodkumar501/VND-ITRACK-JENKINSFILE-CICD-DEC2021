@@ -79,9 +79,10 @@ node {
 
 STEP4: build docker image
 for this you have install docker in your jenkins and has permissions to push images to docker and Dockerfile in your source code
+install docker plugin 	 " Docker Pipeline "  --->Deployment DevOps docker pipelin  ---> Build and use Docker containers from pipelines.
 =============================================================================================
 
-
+https://medium.com/swlh/jenkins-pipeline-to-create-docker-image-and-push-to-docker-hub-721919512f2
 
 
 
