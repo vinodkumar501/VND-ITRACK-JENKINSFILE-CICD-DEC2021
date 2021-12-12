@@ -201,6 +201,201 @@ pipline as job ---> inside are subjobs
 DECLARATIVE:
 If create a script( jenkinsfile) then that file in central repo along with project that file and run it in jenkins -----Declarative pipeline
 
+Pipeline:
+ Pipeline is a user defined model of CD pipeline, pipeline code defines your entire build process,which typically includes stages for building an appn , testing it and 
+ then delivering
+ 
+pipeline block is a key part of declarative pipeline syntanx
+
+
+node:
+is a machine which is part of jenkins env and is capable of executing a pipeline.
+node --> is a block scripted pipeline syntax
+
+stage:
+set of tasks performed over pipeline
+
+step:
+single task, tells what to do in point in time 
+ex: execute make command use sh step
+
+sh 'make'
+
+-------------------------------- scripted pipeline -------------------------------
+
+node {                         //execute this pipeline or any of its stages 0n any of its available agents 
+   stage(build) {              //stage blocks are optional in scripted syntax, however implementing stage blocks in scripted pipeline provides clear visualisation of eac stage subset of tasks or steps in jenkins UI 
+     //                        //perform some steps related to build stage
+   }
+   stage(test) {
+     //                       
+   }
+   stage(deploy) {
+     //
+   }
+}
+
+
+----------------
+pipleine script:              used for scritped pipeline, write in jenkins UI
+pipelin script from scm :     declarative scripted pipeline
+
+
+node {
+   stage('build') {                        // donot have stages 
+      echo "building the project"        // no need to use steps stage
+   }
+   stage('test') {
+      echo "test the project"
+   }
+   stage('deploy') {
+      echo "deploy the project"
+   }
+   stage('release') {
+      echo "release the project"
+   }
+ }
+
+O/P:
+
+Started by user vinod kumar
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/scripted pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (build)
+[Pipeline] echo
+building the project
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (test)
+[Pipeline] echo
+test the project
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (deploy)
+[Pipeline] echo
+deploy the project
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (release)
+[Pipeline] echo
+release the project
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+--------------------------------- Declarative pipline ----------------------------------
+git hub:
+
+https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git
+
+https://www.youtube.com/watch?v=Ozna0MS5D1E
+
+https://github.com/vinodkumar501/JenkinsPipelineDemoProject
+
+https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
+
+we need to create Jenkinsfile , this file should be there in scm system (git).
+scripted is in jenkins UI only
+
+scripted: we directly write scripts inside jenkins
+declarative: write script in Jenkinsfile ( store in git ) along with our project
+
+
+pipeline {                          //creates pipeline
+    agent any                       //execute this pipeline or any of its stages 0n any of its available agents
+    stages {
+       stage('build') {               //enter to build stage
+       steps {                      // perform some steps related to build stage
+         //
+         echo "build"
+         }
+       }
+       stage('test') {
+       steps {
+         //
+         echo "test"
+         }
+       }
+       stage('deploy') {
+       steps {
+         //
+         echo "deploy"
+        }
+      }
+   }
+}
+
+============================
+The Declarative Pipeline example above contains the minimum necessary structure to implement a continuous delivery pipeline.
+The agent directive, which is required, instructs Jenkins to allocate an executor and workspace for the Pipeline. Without an agent directive, not only is the Declarative Pipeline not valid, it would not be capable of doing any work! By default the agent directive ensures that the source repository is checked out and made available for steps in the subsequent stages`
+
+The stages directive, and steps directives are also required for a valid Declarative Pipeline as they instruct Jenkins what to execute and in which stage it 
+should be executed.
+
+Jenkinsfile (Scripted Pipeline)
+-------------------------------------
+node {
+  stage {
+    checkout "scm"
+    }
+}
+
+
+The checkout step will checkout code from source control; scm is a special variable which instructs the checkout step to clone the specific revision which triggered
+this Pipeline run.
+
+https://www.jenkins.io/blog/2017/02/07/declarative-maven-project/
+
+pipeline{
+agent any
+tools { 
+        maven 'mvn-3.8.4' 
+        jdk 'jdk-1.8' 
+    }
+stages 
+{
+stage('Build') 
+{
+steps{
+echo "Building the Code.........."
+sh "mvn clean"                             //bat "mvn clean" --> for windows
+}
+}
+stage('Test') 
+{
+steps{
+echo "Testing the Code.........."
+sh "mvn test"
+}
+}
+stage('Compile') 
+{
+steps{
+echo "Compiling the Project.........."
+sh "mvn compile"
+}
+}
+stage('Deploy') 
+{
+steps{
+echo "Deploying the Project.........."
+}
+}
+}
+}
+
+
+
+
+
 
 
 
