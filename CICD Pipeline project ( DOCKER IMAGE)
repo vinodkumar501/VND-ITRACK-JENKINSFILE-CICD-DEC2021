@@ -4,13 +4,16 @@ Dev --> commit --> github --> jenkins --->Build docker image -->push to docker h
 
 Create 2 VMS 1.jenkins node and 2.Dev nodes in cloud
 
+
+step1: checkout git clone 
+=========================================================================================================================================
 node {
    stage('checkout git scm') {
     git credentialsId: 'git-cred-vnd', url: 'https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git'
 	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ use this for above git row creation "generate //pipleinscript
     }
 }
-
+=========================================================================================================================================
 ------
 trigger build and check
 1.cloning repo 
@@ -32,21 +35,51 @@ using GIT_ASKPASS to set credentials git-cred
  build is using master branch ( if we not specify any by defautl it take master only) if you need other branch
  
  
+step2: checkout and mvn build (in scripted pipeline)
 ================================================================================
 
 node {
    stage('checkout git scm') {
-    git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git', branch: 'devops-noc'     
-	   //http://jenkinsip:8080/job/declarative%20pipeline/pipeline-syntax/ use this for above git row creation "generate //pipleinscript
-     //default if you not specify any branch it takes default as master  // here devops-noc
+   git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git', branch: 'devops-noc'
+	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ use this for above git row creation "generate //pipleinscript
     }
+   stage('mvn package'){
+   sh 'mvn clean package'  
+   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/        //use sh: shell script
+  }
+ }
+
+=========================================================================================================================================
+
+O/P:
++ mvn clean package
+/var/lib/jenkins/workspace/declarative pipeline@tmp/durable-5233be8f/script.sh: line 1: mvn: command not found
+
+SOL:
+Jenkins not able to find mvn installed so we need to add it an explicitly
+
+STEP3: Checkout and mvn build (in scripted pipeline) NEED TO DEFINE mvnHome to pick mvn 
+=======================================================================================
+
+node {
+   tool name: 'mvn-3.8.4', type: 'maven'
+   stage('checkout git scm') {
+   git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git'
+	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ use this for above git row creation "generate //pipleinscript
+    }
+   stage('mvn package'){
+   def mvnHome = tool name: 'mvn-3.8.4', type: 'maven'
+   def mvnCMD = "${mvnHome}/bin/mvn"             //you must add "" before interpolation ${mvnHome}
+   sh "${mvnCMD} clean package"                  //you must add "" before interpolation ${mvnHome}
+  }
 }
+ 
+ -------------
+ click on build
 
-
-
-
-
-
+STEP4: build docker image
+for this you have install docker in your jenkins and has permissions to push images to docker and Dockerfile in your source code
+=============================================================================================
 
 
 
