@@ -85,6 +85,25 @@ install docker plugin 	 " Docker Pipeline "  --->Deployment DevOps docker pipeli
 https://medium.com/swlh/jenkins-pipeline-to-create-docker-image-and-push-to-docker-hub-721919512f2
 
 
+node {
+   stage('checkout git scm') {
+      git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/vnd-itrack-jenkinsfile-CICD-DEC2021.git'
+	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ use this for above git row creation "generate //pipleinscript
+    }
+   stage('package'){
+      def mvnHome = tool name: 'mvn-3.8.4', type: 'maven'
+      def mvnCMD = "${mvnHome}/bin/mvn"
+      sh "${mvnCMD} clean package"          //you must add "" before interpolation ${mvnHome}
+    }
+   stage('build'){
+      sh 'docker build -t vinodkumarch/myjavapp-1.0.0 .'
+    }
+}
+
+------------------------------------------------------------------------------------------------
+
+
+
 
 
 
