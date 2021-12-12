@@ -2,4 +2,58 @@ Jenkins-Pipeline project
 
 Dev --> commit --> github --> jenkins --->Build docker image -->push to docker hub --> pull docker image ---> deploy to Dev
 
+Create 2 VMS 1.jenkins node and 2.Dev nodes in cloud
+
+node {
+   stage('checkout git scm') {
+    git credentialsId: 'git-cred-vnd', url: 'https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git'
+	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ use this for above git row creation "generate //pipleinscript
+    }
+}
+
+------
+trigger build and check
+1.cloning repo 
+2.using git-cred-vnd credentials login to github ( pvt repo )
+3.clone master branch
+
+using credential git-cred-vnd
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/declarative pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git # timeout=10
+Fetching upstream changes from https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.32.0'
+ 
+using GIT_ASKPASS to set credentials git-cred
+ > git fetch --tags --force --progress -- https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ 
+ build is using master branch ( if we not specify any by defautl it take master only) if you need other branch
+ 
+ 
+================================================================================
+
+node {
+   stage('checkout git scm') {
+    git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git', branch: 'devops-noc'     
+	   //http://jenkinsip:8080/job/declarative%20pipeline/pipeline-syntax/ use this for above git row creation "generate //pipleinscript
+     //default if you not specify any branch it takes default as master  // here devops-noc
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
