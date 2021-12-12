@@ -4,13 +4,13 @@ Jenkinsfile
 pipeline {
    agent any 
    tools {
-       gradle('gradle-7')  
+       gradle('gradle-7')  //configured in jenkins ui ---> manage jenkis  ---> global tool configuration
    }
    stages{
       stage("run frontend"){
        steps{
          echo 'executing yarn ..'
-         nodejs('node-17.1.0'){
+         nodejs('node-17.1.0'){    ////configured in jenkins ui ---> manage jenkis  ---> global tool configuration
              sh 'yarn install'
              sh 'npm config ls'
              sh 'npm -version'
