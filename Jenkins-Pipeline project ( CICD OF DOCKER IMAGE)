@@ -1,0 +1,5 @@
+Jenkins-Pipeline project 
+
+Dev --> commit --> github --> jenkins --->Build docker image -->push to docker hub --> pull docker image ---> deploy to Dev
+
+
