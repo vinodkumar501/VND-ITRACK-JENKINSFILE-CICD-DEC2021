@@ -392,7 +392,53 @@ echo "Deploying the Project.........."
 }
 }
 
+--------------------------------  OR ---------------------------------------------
 
+pipeline{
+agent any
+tools { 
+        maven 'mvn-3.8.4'  //names written or configured in jenkins, global tool configuration
+        jdk 'jdk-1.8' 
+    }
+stages {
+         stage('Build') {
+         steps{
+         echo "Building the Code.........."
+         sh "mvn clean"                             //bat "mvn clean" --> for windows
+          }
+        }
+         stage('Test') {
+         steps{
+         echo "Testing the Code.........."
+         sh "mvn test"
+           }
+        }
+         stage('Compile') {
+         steps{
+         echo "Compiling the Project.........."
+         sh "mvn compile"
+          }
+       }
+         stage('Deploy') {
+         steps{
+         echo "Deploying the Project.........."
+          }
+       }
+    }
+}
+
+-----------------------
+On your SCM code you need to include Jenkinsfile and pom.xml for maven
+
+If you not include pom.xml will get below error.
+
+[ERROR] The goal you specified requires a project to execute but there is no POM in this directory (/var/lib/jenkins/workspace/declarative pipeline). Please verify you invoked Maven from the correct directory. -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MissingProjectException
 
 
 
