@@ -75,26 +75,38 @@ PATH GIT EXECUTABLE : git
 yum install git -y
 Set path to git executable. This can be just "git" or complete path.
 
-==============================================Automatic installation ( maven ,gradle , nodejs )================================================================
+==============================================Automatic installation ( maven ,gradle , nodejs, docker )================================================================
+
+----------------------------------- MAVEN ----------------------------------
 mvn:
 name : mvn-3.8.4
+
 select install automatically and tick version: 3.8.4
 and save
-
 you need to mention maven tool details in jenkinsfile
 
+-----------------------------------GRADLE--------------------------------------
 gradle
 name: gradle-7
 select install automatically and tick version: 7.3.2
 
-nodejs 
-install plugin as nodejs
+-----------------------------------NODEJS--------------------------------------
+nodejs
+
+----> install plugin as nodejs
+
+CONFIGURE IN GLOBAL TOOL CONFIGURQTION:
 
 name: node-17.1.0
 select install automatically and tick version : 17.1.0
 Global npm packages to install: yarn
 
+----------------------------------- DOCKER --------------------------------------
+docker
 
+---->Install DOCKER PLUGIN in Jenkins then configure it in 
+
+Manage Jenkins --> Global tool configuration --> Docker --> install automatically (click on ) , select version then save
 
 -------------------------------------> Jenkinsfile <-------------------------------------------
 
