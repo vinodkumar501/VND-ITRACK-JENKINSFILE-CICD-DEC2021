@@ -24,7 +24,7 @@ sudo systemctl start jenkins
 sudo systemctl status jenkins
 cat /var/lib/jenkins/secrets/initialAdminPassword
 
-----------------------------------------------------ERRORS DURING INSTALLATION -------------------------------------------
+================================================================ERRORS DURING INSTALLATION ================================================================
 Error1:
 sudo yum install jenkins java-1.8.0-openjdk-devel -y
 error:
@@ -45,8 +45,10 @@ To use, run
 Error3:
 Starting Jenkins File "/usr/bin/java" is not executable.
 Nov 26 13:54:09 ip-172-31-87-38.ec2.internal jenkins[4037]: [FAILED]
------------------------------------------------------------------------------------------------------------------------------------------------------------------
-CONFIGURE TOOLS 
+
+================================================================How to check  or update java path ================================================================
+CCONFIGURE TOOLS 
+
 MANAGE JENKINS -> GLOBAL TOOL CONFIGURATIONS
 
 Manual installation
@@ -56,11 +58,11 @@ sudo yum install jenkins java-1.8.0-openjdk-devel -y
 readlink -f $(which java)
 /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.302.b08-0.amzn2.0.1.x86_64/jre/bin/java
 
-
 or 
 
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.302.b08-0.amzn2.0.1.x86_64
 
+======================================== Java and git path ===========================================
 NAME: JAVA-1.8
 JAVA_PATH:
 /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.302.b08-0.amzn2.0.1.x86_64/
@@ -73,13 +75,20 @@ PATH GIT EXECUTABLE : git
 yum install git -y
 Set path to git executable. This can be just "git" or complete path.
 
-Automatic installation:
+==============================================Automatic installation ( maven ,gradle , nodejs )================================================================
 mvn:
-name : mvn-1.8
+name : mvn-3.8.4
 select install automatically and tick version: 3.8.4
 and save
 
 you need to mention maven tool details in jenkinsfile
+
+gradle
+name: gradle
+select install automatically and tick version: 3.8.4
+
+
+
 
 --------------->Jenkinsfile<-----------------
 pipeline {
