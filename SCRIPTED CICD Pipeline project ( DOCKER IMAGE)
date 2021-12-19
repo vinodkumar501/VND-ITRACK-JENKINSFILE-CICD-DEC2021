@@ -91,6 +91,24 @@ node {
     }
 }
 
+
+OR
+
+
+node {
+   stage('checkout git scm') {
+      git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/vnd-itrack-jenkinsfile-CICD-DEC2021.git'
+	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ 
+	   //use this for above git row creation "generate //pipleinscript
+    }
+   stage('package'){
+       def mvnHome = tool name: 'mvn-3.8.4', type: 'maven'
+       def mvnCMD = "${mvnHome}/bin/mvn"
+       sh "${mvnCMD} clean package"
+       //def mvn tool "mvn-3.8.4' name mentioned in global tool configuration
+       //sh "${mvnHome}/bin/mvn clean install package"          //you must add "" before interpolation ${mvnHome}
+    }
+}
 =====================================================================================================================
 
 click on build
@@ -112,10 +130,14 @@ STEP3: BUILD DOCKER IMAGE
 for this you have install docker in your jenkins and has permissions to push images to docker and Dockerfile in your source code
 install docker plugin 	 " Docker Pipeline "  --->Deployment DevOps docker pipelin  ---> Build and use Docker containers from pipelines.
 
+and you have 
+Dockerfile in your base of repo
+
 ==================================================  =====================================
 
 //https://medium.com/swlh/jenkins-pipeline-to-create-docker-image-and-push-to-docker-hub-721919512f2
 
+make sure that jenkins has installed docker and jenkins has sufficient permissions to go with docker commands.
 
 node {
    def mvnHome = tool name: 'mvn-3.8.4'              //def mvn tool "mvn-3.8.4' name mentioned in global tool configuration
@@ -125,13 +147,17 @@ node {
 	   //use this for above git row creation "generate //pipleinscript
     }
    stage('package'){
+      sh "${mvnHome}/bin/mvn -v"                             
+       //var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/mvn-3.8.4/bin/mvn -   Apache Maven 3.8.4
       sh "${mvnHome}/bin/mvn clean install package"          //you must add "" before interpolation ${mvnHome}
     }
    
    stage('build'){
-      sh 'docker build -t vinodkumarch/myjavapp-1.0.0 .'
+      sh 'docker build -t vinodkumarch/myjavapp-1.0.0 .'     //vinodkumarch as dockerhub repo start with that 
     }
 }
+
+
 
 
 
