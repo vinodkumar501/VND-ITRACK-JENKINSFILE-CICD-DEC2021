@@ -4,17 +4,23 @@ Dev --> commit --> github --> jenkins --->Build docker image -->push to docker h
 
 Create 2 VMS 1.jenkins node and 2.Dev nodes in cloud
 
+//http://3.91.213.151:8080/job/scripted%20pipeline/pipeline-syntax/
 
-step1: checkout git clone 
-=========================================================================================================================================
+git credentialsId: 'git-cred-vnd', url: 'https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git'
+
+The above details you get in pipeline-synntax 
+
+
+STEP1: CHECKOUT GIT CLONE
+============================================= STEP1 ===========================================================
 node {
    stage('checkout git scm') {
-    git credentialsId: 'git-cred-vnd', url: 'https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git'
+    git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/vnd-itrack-jenkinsfile-CICD-DEC2021.git'
 	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ use this for above git row creation "generate //pipleinscript
     }
 }
 =========================================================================================================================================
-------
+
 trigger build and check
 1.cloning repo 
 2.using git-cred-vnd credentials login to github ( pvt repo )
@@ -35,8 +41,9 @@ using GIT_ASKPASS to set credentials git-cred
  build is using master branch ( if we not specify any by defautl it take master only) if you need other branch
  
  
-step2: checkout and mvn build (in scripted pipeline)
-================================================================================
+Goto tools maven 
+STEP2: CHECKOUT AND MVN BUILD (in scripted pipeline)
+================================== STEP2: CHECKOUT AND MVN BUILD (in scripted pipeline) =========================================
 
 node {
    stage('checkout git scm') {
@@ -49,7 +56,7 @@ node {
   }
  }
 
-=========================================================================================================================================
+============================== O/P failed with below error =========================================
 
 O/P:
 + mvn clean package
@@ -58,8 +65,23 @@ O/P:
 SOL:
 Jenkins not able to find mvn installed so we need to add it an explicitly
 
-STEP3: Checkout and mvn build (in scripted pipeline) NEED TO DEFINE mvnHome to pick mvn 
-=======================================================================================
+
+
+
+
+========================================STEP2: Checkout and mvn build (in scripted pipeline) NEED TO DEFINE mvnHome to pick mvn =======================================
+
+This details you will get at below step
+http://3.91.213.151:8080/job/scripted%20pipeline/pipeline-syntax/
+
+Go to tools :
+
+select tool type as maven: tool: 3.8.4
+
+Generate pipeline script
+O/P
+tool name: 'mvn-3.8.4', type: 'maven'
+================================================ STEP2 =============================================================
 
 node {
    tool name: 'mvn-3.8.4', type: 'maven'
@@ -74,15 +96,32 @@ node {
   }
 }
  
- -------------
- click on build
+=====================================================================================================================
 
-STEP4: build docker image
+click on build
+
+O/P:
+Building jar: /var/lib/jenkins/workspace/scripted pipeline/target/JenkinsPipelineDemoPrjoject-vnd-01-SNAPSHOT.jar
+
+Here /var/lib/jenkins/workspace/scripted pipeline  ------> job name 
+jar file stored in /target/JenkinsPipelineDemoPrjoject-vnd-01-SNAPSHOT.jar
+
+
+
+=================================================== STEP3: BUILD DOCKER IMAGE==================================================
+
+Install DOCKER PLUGIN in Jenkins then configure it in 
+
+Manage Jenkins --> Global tool configuration --> Docker --> install automatically (click on ) , select version then save
+
+STEP3: BUILD DOCKER IMAGE
 for this you have install docker in your jenkins and has permissions to push images to docker and Dockerfile in your source code
 install docker plugin 	 " Docker Pipeline "  --->Deployment DevOps docker pipelin  ---> Build and use Docker containers from pipelines.
-=============================================================================================
 
-https://medium.com/swlh/jenkins-pipeline-to-create-docker-image-and-push-to-docker-hub-721919512f2
+
+==================================================  =====================================
+
+//https://medium.com/swlh/jenkins-pipeline-to-create-docker-image-and-push-to-docker-hub-721919512f2
 
 
 node {
