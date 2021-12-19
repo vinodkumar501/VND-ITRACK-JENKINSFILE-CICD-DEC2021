@@ -1,7 +1,9 @@
 
 ==================>scripted  pipeline
 
-start with node {
+start with 
+
+node {
 //
 }
 
@@ -40,8 +42,7 @@ pipeline {
 }
 
 
-
-============================================= declarative file2  using env variable======================================
+============================================ declarative file2  using env variable======================================
 
 pipeline{
   agent any
