@@ -53,8 +53,7 @@ node {
    stage('mvn package'){
    sh 'mvn clean package'  
    //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/        //use sh: shell script
-  }
- }
+
 
 ============================== O/P failed with below error =========================================
 
@@ -66,10 +65,7 @@ SOL:
 Jenkins not able to find mvn installed so we need to add it an explicitly
 
 
-
-
-
-========================================STEP2: Checkout and mvn build (in scripted pipeline) NEED TO DEFINE mvnHome to pick mvn =======================================
+=======================================STEP2: Checkout and mvn build (in scripted pipeline) NEED TO DEFINE mvnHome to pick mvn =======================================
 
 This details you will get at below step
 http://3.91.213.151:8080/job/scripted%20pipeline/pipeline-syntax/
@@ -84,17 +80,17 @@ tool name: 'mvn-3.8.4', type: 'maven'
 ================================================ STEP2 =============================================================
 
 node {
+   def mvnHome = tool name: 'mvn-3.8.4'              //def mvn tool "mvn-3.8.4' name mentioned in global tool configuration
    stage('checkout git scm') {
-   git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/JenkinsPipelineDemoProject.git'
-	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ use this for above git row creation "generate //pipleinscript
+      git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/vnd-itrack-jenkinsfile-CICD-DEC2021.git'
+	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ 
+	   //use this for above git row creation "generate //pipleinscript
     }
-   stage('mvn package'){
-   def mvnHome = tool name: 'mvn-3.8.4', type: 'maven'
-   def mvnCMD = "${mvnHome}/bin/mvn"             //you must add "" before interpolation ${mvnHome}
-   sh "${mvnCMD} clean package"                  //you must add "" before interpolation ${mvnHome}
-  }
+   stage('package'){
+      sh "${mvnHome}/bin/mvn clean install package"          //you must add "" before interpolation ${mvnHome}
+    }
 }
- 
+
 =====================================================================================================================
 
 click on build
@@ -104,7 +100,6 @@ Building jar: /var/lib/jenkins/workspace/scripted pipeline/target/JenkinsPipelin
 
 Here /var/lib/jenkins/workspace/scripted pipeline  ------> job name 
 jar file stored in /target/JenkinsPipelineDemoPrjoject-vnd-01-SNAPSHOT.jar
-
 
 
 =================================================== STEP3: BUILD DOCKER IMAGE==================================================
@@ -117,28 +112,27 @@ STEP3: BUILD DOCKER IMAGE
 for this you have install docker in your jenkins and has permissions to push images to docker and Dockerfile in your source code
 install docker plugin 	 " Docker Pipeline "  --->Deployment DevOps docker pipelin  ---> Build and use Docker containers from pipelines.
 
-
 ==================================================  =====================================
 
 //https://medium.com/swlh/jenkins-pipeline-to-create-docker-image-and-push-to-docker-hub-721919512f2
 
 
 node {
+   def mvnHome = tool name: 'mvn-3.8.4'              //def mvn tool "mvn-3.8.4' name mentioned in global tool configuration
    stage('checkout git scm') {
       git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/vnd-itrack-jenkinsfile-CICD-DEC2021.git'
-	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ use this for above git row creation "generate //pipleinscript
+	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ 
+	   //use this for above git row creation "generate //pipleinscript
     }
    stage('package'){
-      def mvnHome = tool name: 'mvn-3.8.4', type: 'maven'
-      def mvnCMD = "${mvnHome}/bin/mvn"
-      sh "${mvnCMD} clean package"          //you must add "" before interpolation ${mvnHome}
+      sh "${mvnHome}/bin/mvn clean install package"          //you must add "" before interpolation ${mvnHome}
     }
+   
    stage('build'){
       sh 'docker build -t vinodkumarch/myjavapp-1.0.0 .'
     }
 }
 
-------------------------------------------------------------------------------------------------
 
 
 
