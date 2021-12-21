@@ -1,4 +1,15 @@
+https://www.youtube.com/watch?v=UjCVCvdI73w
+
 First create a vm specific for sonarqube , if you not specify proper h/w it stop to up.
+
+https://stackoverflow.com/questions/47835125/sonarqube-process-exited-with-exit-value-es-137
+
+By default  "Embedded database should be used for evaluation purposes only" like H2 in sonarqube
+
+NOTE: Embedded database should be used for evaluation purposes only
+
+The embedded database will not scale, it will not support upgrading to newer versions of SonarQube, and there is no support for 
+migrating your data out of it into a different database engine.
 
 Java is pre-requisiste for sonarqube
 
@@ -8,6 +19,8 @@ https://www.sonarqube.org/success-download-community-edition/
 From sonarqube 7 onwards it need java 11 as pre-requisite
 
 ================================== INSTALL JAVA-11 ===============================
+
+https://tecadmin.net/install-java-on-amazon-linux/
 
 INSTALL JAVA-11
 
@@ -106,8 +119,105 @@ access with <ip>:8000
 
 by default credentials are      --> admin/admin   once login we need to update password   ---> admin/root
 
+============================================= STEP2 ==============================================
+
+Once login --> click select projects -----> manually
+
+name it as "sonarqube-vnd" and create token 
+
+->name it as any like "sonarqube-vnd" and click on generate 
+6cbeb10a90d8cbe7b054110363d0b89c3b5b4a97
+
+->Run analysis on your project What option best describes your build?
+click on "maven"
+
+Execute the Scanner for Maven
+Running a SonarQube analysis with Maven is straighforward. You just need to run the following command in your project's folder.
+
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=sonarqube-vnd \
+  -Dsonar.host.url=http://44.201.10.55:8000 \
+  -Dsonar.login=6cbeb10a90d8cbe7b054110363d0b89c3b5b4a97
+  
+  
+  
+------------------------------------------------------- Jenkinsfile -------------------------------------------------------
+
+node {
+   def mvnHome = tool name: 'mvn-3.8.4'              //def mvn tool "mvn-3.8.4' name mentioned in global tool configuration
+   stage('checkout git scm') {
+      git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/vnd-itrack-jenkinsfile-CICD-DEC2021.git'
+	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ 
+	   //use this for above git row creation "generate //pipleinscript
+    }
+   stage('package'){
+      sh "${mvnHome}/bin/mvn -v"
+      sh "${mvnHome}/bin/mvn clean package"          //you must add "" before interpolation ${mvnHome}
+    }
+   stage('SonarQube analysis') {
+      //def scannerHome = tool 'SonarScanner 4.0';
+      withSonarQubeEnv('sonarqube-9.2') { // If you have configured more  one global server connection, you specify its name
+      //sh "${scannerHome}/bin/sonar-scanner"
+      sh "${mvnHome}/bin/mvn sonar:sonar"
+    }
+  }
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+===================================================================================================
+How do you want to analyze your repository?
+click on Jenkins
+
+------------------------------ On jenkins install 
+
+SonarQube Scanner
+External Site/Tool Integrations Build Reports
+This plugin allows an easy integration of SonarQube, the open source platform for Continuous Inspection of code quality.
 
 
 
