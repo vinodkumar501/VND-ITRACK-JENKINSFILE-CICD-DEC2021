@@ -1,0 +1,28 @@
+https://maven.apache.org/download.cgi
+
+cd /tmp
+wget https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip
+unzip https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip
+cd apache-maven-3.8.4-bin
+ 
+cd ~
+cd
+ 
+vi .bashrc
+
+add below
+export PATH="$PATH:/tmp/apache-maven-3.8.4/bin"
+
+source .bashrc
+
+
+check
+
+mvn -version
+Apache Maven 3.8.4 (9b656c72d54e5bacbed989b64718c159fe39b537)
+Maven home: /tmp/apache-maven-3.8.4
+Java version: 17.0.1, vendor: Amazon.com Inc., runtime: /usr/lib/jvm/java-17-amazon-corretto.x86_64
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "5.10.75-79.358.amzn2.x86_64", arch: "amd64", family: "unix"
+
+
