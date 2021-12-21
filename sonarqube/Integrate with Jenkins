@@ -1,1 +1,134 @@
+First create a vm specific for sonarqube , if you not specify proper h/w it stop to up.
+
+Java is pre-requisiste for sonarqube
+
+https://docs.sonarqube.org/latest/setup/install-server/
+https://www.sonarqube.org/success-download-community-edition/
+
+From sonarqube 7 onwards it need java 11 as pre-requisite
+
+================================== INSTALL JAVA-11 ===============================
+
+INSTALL JAVA-11
+
+sudo amazon-linux-extras install java-openjdk11
+java -version
+
+
+================================ INSTAL SONARQUBE USINT ZIP FILE ==================================
+Need to install sonarqube as non root user only, otherwie elastisearch will not up.
+
+https://docs.sonarqube.org/latest/setup/install-server/
+https://www.sonarqube.org/success-download-community-edition/
+
+1.wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.2.3.50713.zip
+2.unzip sonarqube-9.2.3.50713.zip
+3.cd sonarqube-9.2.3.50713
+
+[ec2-user@ip-172-31-10-73 ~]$ cd sonarqube-9.2.3.50713/
+[ec2-user@ip-172-31-10-73 sonarqube-9.2.3.50713]$ ls
+bin  conf  COPYING  data  dependency-license.json  elasticsearch  extensions  lib  logs  temp  web
+
+[ec2-user@ip-172-31-10-73 sonarqube-9.2.3.50713]$ cd bin/
+[ec2-user@ip-172-31-10-73 bin]$ ls
+jsw-license  linux-x86-64  macosx-universal-64  windows-x86-64
+[ec2-user@ip-172-31-10-73 bin]$ cd linux-x86-64/
+
+[ec2-user@ip-172-31-10-73 linux-x86-64]$ ls
+lib  SonarQube.pid  sonar.sh  wrapper
+
+$pwd
+/home/ec2-user/sonarqube-9.2.3.50713/bin/linux-x86-64
+lib  SonarQube.pid  sonar.sh  wrapper
+
+./sonar.sh status
+./sonar.sh start
+./sonar.sh stop
+
+
+Once up login with below port <ip>:9000
+http://44.201.10.5:9000/                         #admin/admin
+
+================================= how to check the logs ==================================
+
+[ec2-user@ip-172-31-10-73 ~]$ ls
+sonarqube-9.2.3.50713  
+
+[ec2-user@ip-172-31-10-73 ~]$ cd sonarqube-9.2.3.50713/
+[ec2-user@ip-172-31-10-73 sonarqube-9.2.3.50713]$ ls
+bin  conf  COPYING  data  dependency-license.json  elasticsearch  extensions  lib  logs  temp  web
+
+[ec2-user@ip-172-31-10-73 sonarqube-9.2.3.50713]$ cd logs/
+[ec2-user@ip-172-31-10-73 logs]$ ls
+access.log  ce.log  es.log  README.txt  sonar.20211221.log  web.log
+
+cat access.log
+cat sonar.20211221.log
+
+================================== CHANGE SONAR PORT AND CONFIGURATION ==================================
+
+GO TO CONFIGURATION 
+
+$ pwd
+/home/ec2-user/sonarqube-9.2.3.50713/conf
+
+ls
+sonar.properties  wrapper.conf
+
+vi sonar.properties
+
+go to path "webserver" and update ,by default its commented and works on 9000 if you want to update uncommenct and restart sonarqube (107 line)
+
+# TCP port for incoming HTTP connections. Default value is 9000.
+#sonar.web.port=9000
+sonar.web.port=8000
+
+IF YOU WANT UPDATE PORT ONLY CHANGE THAT BY DEFAULT IT ACCESS 9000 ( EVEN IF COMMENTED )
+
+---------------> Once update restart sonarqube <-------------------
+
+cd /home/ec2-user/sonarqube-9.2.3.50713/bin/linux-x86-64
+[ec2-user@ip-172-31-10-73 linux-x86-64]$ ls
+lib  SonarQube.pid  sonar.sh  wrapper
+
+[ec2-user@ip-172-31-10-73 linux-x86-64]$ ./sonar.sh stop
+Gracefully stopping SonarQube...
+Stopped SonarQube.
+
+[ec2-user@ip-172-31-10-73 linux-x86-64]$ ./sonar.sh start
+Starting SonarQube...
+Started SonarQube.
+
+[ec2-user@ip-172-31-10-73 linux-x86-64]$ ./sonar.sh status
+SonarQube is running (14071).
+
+access with <ip>:8000
+
+by default credentials are      --> admin/admin   once login we need to update password   ---> admin/root
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
