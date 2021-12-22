@@ -123,7 +123,81 @@ pipeline {
     }    
 }
 
-=====================================  =====================================  =====================================  
+=====================================  INTEGRATE WITH SONARQUBE  =====================================  
+https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-jenkins/
+
+If you are using maven no need to use sonar scanner
+
+SonarScanner for Maven:
+
+node {
+  stage('SCM') {
+    git 'https://github.com/foo/bar.git'
+  }
+  stage('SonarQube analysis') {
+    withSonarQubeEnv(credentialsId: 'f225455e-ea59-40fa-8af7-08176e86507a', installationName: 'My SonarQube Server') { // You can override the credential to be used
+      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+    }
+  }
+}
+
+
+
+====================================== Jenkinsfile3 ==============================================
+
+pipeline {
+    agent any
+    tools {
+      maven 'mvn-3.8.4'
+    }
+    stages {
+        stage (checkout) {
+            steps {
+                git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/hello-world.git'
+		//checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-ITRACK-JENKINSFILE-CICD-DEC2021.git']]])
+            }
+        }
+        stage (build) {
+            steps {
+                sh "mvn clean install"       //sh "mvn clean install -f mywebapp/prox.xml"   If pom.xml not in root folder
+            }
+        }
+        stage (sonarqube_analysis) {
+           steps {
+              withSonarQubeEnv(credentialsId: 'sonarqube-cred', installationName: 'sonarqube-9.2') {            // You can override the credential to be used
+	        
+               //sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+              }
+        }   
+    }    
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
