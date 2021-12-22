@@ -350,7 +350,67 @@ pipeline {
     }    
   }
 }
-=========================================== Approval =====================================================
+=========================================== Approval GMAIL NOTIFICATION =====================================================
+
+Install "Email Extension Template" plugin in JenkinsUI
+
+emailext Build Notifiers
+This plugin allows administrators to create global templates for the Extended Email Publisher.
+
+CONFIGURE GMAIL SETTINGS:
+
+https://stackoverflow.com/questions/35347269/javax-mail-authenticationfailedexception-535-5-7-8-username-and-password-not-ac
+
+Two Step Verification should be turned off.
+
+Allow Less Secure App(should be turned on).
+
+javax.net.ssl.SSLException: Unsupported or unrecognized SSL message
+
+
+----------------------------------------------------------------------
+Two Step Verification should be turned off.
+Allow Less Secure App(should be turned on).
+
+https://support.google.com/accounts/answer/1064203?hl=en
+https://myaccount.google.com/lesssecureapps
+
+----------------------------------------------------------------------
+javax.net.ssl.SSLException: Unsupported or unrecognized SSL message
+
+https://stackoverflow.com/questions/11628065/error-when-sending-email-with-jenkins
+https://accounts.google.com/DisplayUnlockCaptcha
+
+I Had the same issue. After witch hunting a lot, I found a solution as below:
+
+even turn on - less secure apps, I was struggling since 6 hour. the second option: And go to  https://accounts.google.com/DisplayUnlockCaptcha
+
+SMTP SERVER: smtp.gmail.com
+Default user e-mail suffix: @gmail.com
+
+Use SMTP Authentication
+username: chvinod****@gmail.com
+pwd: **************
+use: ssl
+smtp port: 465
+
+Test configuration by sending test e-mail
+Test e-mail recipient
+chvinod****@gmail.com  ( use any mail or same smtp )
+
+Test configuration (o/p)
+Email was successfully sent
+
+
+
+
+
+
+
+
+
+
+
 
 pipeline {
     agent any
