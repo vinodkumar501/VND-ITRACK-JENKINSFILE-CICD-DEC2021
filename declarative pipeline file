@@ -131,7 +131,7 @@ node {
 
 
 
-====================================== Jenkinsfile3 ==============================================
+============================================MAVEN & SONAR BUILD STAGE (CHECKOUT AND BUILD & SONAR ANALYSIS) (Jenkinsfile3) ==============================================
 
 pipeline {
     agent any
