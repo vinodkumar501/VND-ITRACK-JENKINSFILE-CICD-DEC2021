@@ -401,14 +401,9 @@ chvinod****@gmail.com  ( use any mail or same smtp )
 Test configuration (o/p)
 Email was successfully sent
 
+https://www.lifewire.com/what-are-the-gmail-smtp-settings-1170854
 
-
-
-
-
-
-
-
+https://stackoverflow.com/questions/31076928/kick-off-a-job-after-manual-approval-in-jenkins
 
 
 
@@ -426,16 +421,16 @@ pipeline {
         }
         stage (build) {
             steps {
-                sh "mvn clean install"       //sh "mvn clean install -f mywebapp/prox.xml"   If pom.xml not in root folder
+                sh "mvn clean install"                                                                    //sh "mvn clean install -f mywebapp/prox.xml"   If pom.xml not in root folder
             }
         }
-        stage (sonarqube_analysis) {
-           steps {
-              withSonarQubeEnv(credentialsId: 'sonarqube-cred', installationName: 'sonarqube-9.2') {            // You can override the credential to be used
-			  sh 'mvn sonar:sonar'           //sh "mvn sonar:sonar -f mywebapp/prox.xml"   If pom.xml not in root folder
+        //stage (sonarqube_analysis) {
+           //steps {
+              //withSonarQubeEnv(credentialsId: 'sonarqube-cred', installationName: 'sonarqube-9.2') {      // You can override the credential to be used
+	      //sh 'mvn sonar:sonar'                                                                        //sh "mvn sonar:sonar -f mywebapp/prox.xml"   If pom.xml not in root folder
                //sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
-              }
-        } 
+              //}
+        //} 
 
         //stage (nexus_upload) {
            //steps {
@@ -448,23 +443,16 @@ pipeline {
               //deploy adapters: [tomcat8(path: '', url: 'http://54.82.235.95:8080/')], contextPath: null, war: '**/*.jar'	
               //}
         //}
-        //stage (slack_notification) {
-          // steps {
-             // slackSend channel: 'dev', message: 'Deployment is done'
-              //}
-        //} 
         stage ('DEV Approve') {
           steps {
+	    mail bcc: '', body: 'BUILD IS TRIGGERED ', cc: '', from: '', replyTo: '', subject: 'BUILD IS TRIGGERED ', to: 'vinodkumar.chenna@gmail.com'
             echo "Taking approval from DEV Manager for QA Deployment"
             timeout(time: 7, unit: 'DAYS') {
             input message: 'Do you want to deploy?', submitter: 'admin'
           }
         }
-      }	
-		
-    }    
-	
-  }
+      }			
+    }    	
 }
 
 
