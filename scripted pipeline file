@@ -119,6 +119,44 @@ pipline as job ---> inside are subjobs
 DECLARATIVE:
 If create a script( jenkinsfile) then that file in central repo along with project that file and run it in jenkins -----Declarative pipeline
 
+===================================== Jenkinsfile1==============================================
+
+node {
+   def mvnHome = tool name: 'mvn-3.8.4'              //def mvn tool "mvn-3.8.4' name mentioned in global tool configuration
+   stage('checkout git scm') {
+      git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/vnd-itrack-jenkinsfile-CICD-DEC2021.git'
+	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ 
+	   //use this for above git row creation "generate //pipleinscript
+    }
+   stage('package'){
+      sh "${mvnHome}/bin/mvn -v"
+      sh "${mvnHome}/bin/mvn clean package"          //you must add "" before interpolation ${mvnHome}
+    }
+   stage('SonarQube analysis') {
+      //def scannerHome = tool 'SonarScanner 4.0';
+      withSonarQubeEnv('sonarqube-9.2') { // If you have configured more  one global server connection, you specify its name
+      //sh "${scannerHome}/bin/sonar-scanner"
+	  sh "${mvnHome}/bin/mvn sonar:sonar"
+    }
+  }
+}
+==============================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
