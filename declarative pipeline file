@@ -80,6 +80,7 @@ pipeline {
         stage (clone) {
             steps {
                 git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/hello-world.git'
+		//checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-ITRACK-JENKINSFILE-CICD-DEC2021.git']]])
             }
         }
         stage (test) {
@@ -95,8 +96,34 @@ pipeline {
     }    
 }
 
+=====================================  MAVEN BUILD STAGE (CHECKOUT AND BUILD) =================================================
 
+pipeline {
+    agent any
+    tools {
+      maven 'mvn-3.8.4'
+    }
+    stages {
+        stage (checkout code) {
+            steps {
+                git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/hello-world.git'
+		//checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-ITRACK-JENKINSFILE-CICD-DEC2021.git']]])
+            }
+        }
+        stage (test) {
+            steps {
+                sh "mvn clean install"       //sh "mvn clean install -f mywebapp/prox.xml"   If pom.xml not in root folder
+            }
+        }
+        stage (deploy) {
+            steps {
+                echo "deploy"
+           }
+       }   
+    }    
+}
 
+=====================================  =====================================  =====================================  
 
 
 
