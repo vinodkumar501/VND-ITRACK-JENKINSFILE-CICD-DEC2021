@@ -1,0 +1,9 @@
+isntall plugin "Deploy to container"
+
+Once done 
+goto
+http://3.92.207.138:8080/job/scripted%20pipeline/pipeline-syntax/
+
+click deploy to container
+This plugin allows you to deploy a war to a container after a successful build.
+Glassfish 3.x remote deployment
