@@ -1,48 +1,51 @@
-
-==================>scripted  pipeline
-
-start with 
+==================>scripted  pipeline <================== start with node { // }
 
 node {
-//
-}
+    
+    
+    //
+ 
+ 
+ }
 
-===================>declarative  pipeline
+===================> declarative  pipeline <==================
 
 start with pipeline and have stages
 
 pipeline{
-  agent any 
-  //
-  }
   
-------------------------- Declarative sample file 1--------------------------
-
-
+  agent any 
+  
+  
+  //
+ 
+ 
+ }
+------------------------- Sample Jenkinsfile --------------------------
 pipeline {
     agent any
-
+    
     stages {
-        stage('Build') {
+        stage (build) {
             steps {
-                echo 'Building..'
+                echo "build"
             }
         }
-        stage('Test') {
+        stage (test) {
             steps {
-                echo 'Testing..'
+                echo "test"
             }
         }
-        stage('Deploy') {
+        stage (deploy) {
             steps {
-                echo 'Deploying....'
-            }
-        }
-    }
+                echo "deploy"
+           }
+       }   
+    }    
 }
 
 
-============================================ declarative file2  using env variable======================================
+============================================ Sample Jenkinsfile2 ======================================
 
 pipeline{
   agent any
@@ -60,6 +63,50 @@ pipeline{
      }
 }
 
-
 Note:
 Declarative Pipeline supports an environment directive, whereas users of Scripted Pipeline must use the withEnv step.
+
+
+============================================ Sample Jenkinsfile3 ======================================
+//user generate pipeline script
+//http://3.92.207.138:8080/job/script/pipeline-syntax/
+//check pipeline script on bottom we get pipeline syntax --> click on git --> add Url and add cred and click on generate o/p
+//git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/hello-world.git'/
+
+pipeline {
+    agent any
+    
+    stages {
+        stage (clone) {
+            steps {
+                git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/hello-world.git'
+            }
+        }
+        stage (test) {
+            steps {
+                echo "test"
+            }
+        }
+        stage (deploy) {
+            steps {
+                echo "deploy"
+           }
+       }   
+    }    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
