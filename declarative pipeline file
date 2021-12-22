@@ -1,26 +1,17 @@
 ==================>scripted  pipeline <================== start with node { // }
 
-node {
-    
-    
-    //
- 
- 
- }
+node {     
+//
+}
 
 ===================> declarative  pipeline <==================
 
 start with pipeline and have stages
 
 pipeline{
-  
-  agent any 
-  
-  
+  agent any  
   //
- 
- 
- }
+}
 ------------------------- Sample Jenkinsfile --------------------------
 pipeline {
     agent any
@@ -44,9 +35,7 @@ pipeline {
     }    
 }
 
-
 ============================================ Sample Jenkinsfile2 ======================================
-
 pipeline{
   agent any
   stages{
@@ -66,7 +55,6 @@ pipeline{
 Note:
 Declarative Pipeline supports an environment directive, whereas users of Scripted Pipeline must use the withEnv step.
 
-
 ============================================ Sample Jenkinsfile3 ======================================
 //user generate pipeline script
 //http://3.92.207.138:8080/job/script/pipeline-syntax/
@@ -79,7 +67,7 @@ pipeline {
     stages {
         stage (clone) {
             steps {
-                git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/hello-world.git'
+                git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-hello-world-java-pom.xml.git'
 		//checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-ITRACK-JENKINSFILE-CICD-DEC2021.git']]])
             }
         }
@@ -106,7 +94,7 @@ pipeline {
     stages {
         stage (checkout code) {
             steps {
-                git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/hello-world.git'
+                git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-hello-world-java-pom.xml.git'
 		//checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-ITRACK-JENKINSFILE-CICD-DEC2021.git']]])
             }
         }
@@ -123,7 +111,7 @@ pipeline {
     }    
 }
 
-=====================================  INTEGRATE WITH SONARQUBE  =====================================  
+============================================================  INTEGRATE WITH SONARQUBE  =====================================  
 https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-jenkins/
 
 If you are using maven no need to use sonar scanner
@@ -153,7 +141,7 @@ pipeline {
     stages {
         stage (checkout) {
             steps {
-                git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/hello-world.git'
+                git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-hello-world-java-pom.xml.git'
 		//checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-ITRACK-JENKINSFILE-CICD-DEC2021.git']]])
             }
         }
