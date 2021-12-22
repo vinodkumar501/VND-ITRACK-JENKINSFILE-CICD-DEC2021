@@ -23,11 +23,11 @@ pipeline {
                 //sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
               }
         } 
-        stage (deploy_to_tomcat) {
-            steps {
-                deploy adapters: [tomcat8(path: '', url: 'http://54.82.235.95:8080/')], contextPath: null, war: '**/*.jar'	
-              }
-        }		
+        //stage (deploy_to_tomcat) {
+            //steps {
+               // deploy adapters: [tomcat8(path: '', url: 'http://54.82.235.95:8080/')], contextPath: null, war: '**/*.jar'	
+              //}
+        //}		
     }    
   }
 }
