@@ -289,6 +289,19 @@ pipeline {
 
 =============================================== Mail to slack ==========================================================
 
+Install  "Slack Notification" plugin on jenkins UI
+Slack Notification
+Build Notifiers slack
+Integrates Jenkins with Slack, allows publishing build statuses, messages and files to Slack channels.
+
+goto 
+http://3.92.207.138:8080/job/scripted%20pipeline/pipeline-syntax/
+
+search for slack
+slackSend: send slack message before you need to configure slack with jenkins
+
+
+
 pipeline {
     agent any
     tools {
@@ -325,6 +338,12 @@ pipeline {
               //deploy adapters: [tomcat8(path: '', url: 'http://54.82.235.95:8080/')], contextPath: null, war: '**/*.jar'	
               //}
         //}
+     // stage (slack notification) {
+      //   steps {
+        //     slackSend channel: 'dev', message: 'Deployment is done'
+        //    }
+     // } 
+    
     }    
   }
 }
