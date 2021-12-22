@@ -6,7 +6,8 @@ pipeline {
     stages {
         stage (checkout) {
             steps {
-                git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/hello-world.git'
+		 git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-ITRACK-JENKINSFILE-CICD-DEC2021.git'
+                //git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/hello-world.git'
 		//checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/VND-ITRACK-JENKINSFILE-CICD-DEC2021.git']]])
             }
         }
