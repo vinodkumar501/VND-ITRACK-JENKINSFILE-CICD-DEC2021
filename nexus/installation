@@ -1,1 +1,21 @@
 https://devopscube.com/how-to-install-latest-sonatype-nexus-3-on-linux/
+
+Run nexus as non root user 
+
+#useradd nexus
+#passwd nexus           
+#visudo
+
+update nexus user line number 101
+   root    ALL=(ALL)ALL
+   nexus   ALL=(ALL)ALL
+   
+login with nexus user
+#su - nexus
+su - nexus
+Last login: Wed Dec 22 07:58:44 UTC 2021 on pts/0
+[nexus@ip-172-31-93-97 ~]$ 
+sudo yum update -y
+sudo yum install wget -y
+
+https://devopscube.com/how-to-install-latest-sonatype-nexus-3-on-linux/
