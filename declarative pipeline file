@@ -407,6 +407,9 @@ https://stackoverflow.com/questions/31076928/kick-off-a-job-after-manual-approva
 
 
 
+https://support.cloudbees.com/hc/en-us/articles/360029265412-How-can-I-approve-a-deployment-and-add-an-optional-delay-for-the-deployment
+============================================================= APPROVAL MAIL ===================================================================================
+
 pipeline {
     agent any
     tools {
@@ -446,13 +449,17 @@ pipeline {
         stage ('DEV Approve') {
           steps {
 	    mail bcc: '', body: 'BUILD IS TRIGGERED ', cc: '', from: '', replyTo: '', subject: 'BUILD IS TRIGGERED ', to: 'vinodkumar.chenna@gmail.com'
-            echo "Taking approval from DEV Manager for QA Deployment"
-            timeout(time: 7, unit: 'DAYS') {
-            input message: 'Do you want to deploy?', submitter: 'admin'
-          }
-        }
-      }			
-    }    	
+            script {
+		    def deploymentDelay = input id: 'Deploy', message: 'Deploy to production?', submitter: 'rkivisto,admin', parameters: [choice(choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'], description: 'Hours to delay deployment?', name: 'deploymentDelay')]
+		    sleep time: deploymentDelay.toInteger(), unit: 'HOURS'
+		    echo "Taking approval from DEV Manager for QA Deployment"
+		    timeout(time: 7, unit: 'DAYS') {
+		    input message: 'Do you want to deploy?', submitter: 'admin'
+		  }
+            }
+        }			
+     }   
+  }
 }
 
 
