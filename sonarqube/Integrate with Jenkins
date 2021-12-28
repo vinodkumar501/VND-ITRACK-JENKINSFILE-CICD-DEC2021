@@ -18,7 +18,7 @@ https://www.sonarqube.org/success-download-community-edition/
 
 From sonarqube 7 onwards it need java 11 as pre-requisite
 
-================================== INSTALL JAVA-11 ==========================================
+==================================  INSTALL JAVA-11 ==========================================
 
 https://tecadmin.net/install-java-on-amazon-linux/
 
@@ -28,7 +28,7 @@ sudo amazon-linux-extras install java-openjdk11
 java -version
 
 
-================================  INSTAL SONARQUBE USINT ZIP FILE  ==================================
+================================  INSTALL SONARQUBE USING ZIP FILE  ==================================
 Need to install sonarqube as non root user only, otherwie elastisearch will not up.
 
 sudo su -
@@ -40,26 +40,19 @@ https://www.sonarqube.org/success-download-community-edition/
 
 1.wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.2.3.50713.zip
 2.unzip sonarqube-9.2.3.50713.zip
-3.cd sonarqube-9.2.3.50713
+3.mv sonarqube-9.2.3.50713 sonarqube-9
 
-sudo su -
-useradd sonaradminvnd
-passwd sonaradminvnd                       #root/root
-
-add sudo privileges 
-visudo
+add sudo privileges to sonaradminvnd
+#visudo
 
 root ALL=(ALL)
 sonaradminvnd ALL=(ALL)
 
-su - sonaradmivnd                         # root
-sudo cp 
-
-[sonaradmivnd@ip-172-31-10-73 ~]$ cd sonarqube-9.2.3.50713/
-[sonaradmivnd@ip-172-31-10-73 sonarqube-9.2.3.50713]$ ls
+[sonaradmivnd@ip-172-31-10-73 ~]$ cd sonarqube-9
+[sonaradmivnd@ip-172-31-10-73 sonarqube-9]$ ls
 bin  conf  COPYING  data  dependency-license.json  elasticsearch  extensions  lib  logs  temp  web
 
-[sonaradmivnd@ip-172-31-10-73 sonarqube-9.2.3.50713]$ cd bin/
+[sonaradmivnd@ip-172-31-10-73 sonarqube-9]$ cd bin/
 [sonaradmivnd@ip-172-31-10-73 bin]$ ls
 jsw-license  linux-x86-64  macosx-universal-64  windows-x86-64
 [sonaradmivnd@ip-172-31-10-73 bin]$ cd linux-x86-64/
@@ -68,7 +61,7 @@ jsw-license  linux-x86-64  macosx-universal-64  windows-x86-64
 lib  SonarQube.pid  sonar.sh  wrapper
 
 $pwd
-/home/sonaradmivnd/sonarqube-9.2.3.50713/bin/linux-x86-64
+/home/sonaradmivnd/sonarqube-9/bin/linux-x86-64
 lib  SonarQube.pid  sonar.sh  wrapper
 
 ./sonar.sh status
@@ -79,16 +72,19 @@ lib  SonarQube.pid  sonar.sh  wrapper
 Once up login with below port <ip>:9000
 http://44.201.10.5:9000/                         #admin/admin
 
-================================= how to check the logs ==================================
+
+
+
+================================= HOW TO CHECK THE LOGS  ==================================
 
 [sonaradmivnd@ip-172-31-10-73 ~]$ ls
 sonarqube-9.2.3.50713  
 
 [sonaradmivnd@ip-172-31-10-73 ~]$ cd sonarqube-9.2.3.50713/
-[sonaradmivnd@ip-172-31-10-73 sonarqube-9.2.3.50713]$ ls
+[sonaradmivnd@ip-172-31-10-73 sonarqube-9]$ ls
 bin  conf  COPYING  data  dependency-license.json  elasticsearch  extensions  lib  logs  temp  web
 
-[sonaradmivnd@ip-172-31-10-73 sonarqube-9.2.3.50713]$ cd logs/
+[sonaradmivnd@ip-172-31-10-73 sonarqube-9]$ cd logs/
 [sonaradmivnd@ip-172-31-10-73 logs]$ ls
 access.log  ce.log  es.log  README.txt  sonar.20211221.log  web.log
 
@@ -100,7 +96,7 @@ cat sonar.20211221.log
 GO TO CONFIGURATION 
 
 $ pwd
-/home/sonaradmivnd/sonarqube-9.2.3.50713/conf
+/home/sonaradmivnd/sonarqube-9/conf
 
 ls
 sonar.properties  wrapper.conf
@@ -120,7 +116,7 @@ IF YOU WANT UPDATE PORT ONLY CHANGE THAT BY DEFAULT IT ACCESS 9000 ( EVEN IF COM
 [sonaradminvnd@ip-172-31-10-73 home]$ ls
 ec2-user  nexus  sonaradmin  sonaradminvnd
 
-cd /home/sonaradmivnd/sonarqube-9.2.3.50713/bin/linux-x86-64
+cd /home/sonaradmivnd/sonarqube-9/bin/linux-x86-64
 [sonaradmivnd@ip-172-31-10-73 linux-x86-64]$ ls
 lib  SonarQube.pid  sonar.sh  wrapper
 
@@ -139,7 +135,7 @@ access with <ip>:8000
 
 by default credentials are      --> admin/admin   once login we need to update password   ---> admin/root
 
-============================================= STEP2 ==============================================
+======================================================================================================== STEP2 ==============================================
 
 Once login --> click select projects -----> manually
 
