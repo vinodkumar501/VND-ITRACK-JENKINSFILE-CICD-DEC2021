@@ -47,7 +47,7 @@ Server authentication token: sonarqube-cred
 
 
 
-------------------------------------------------------- Jenkinsfile -------------------------------------------------------
+------------------------------------------------------- Jenkinsfile-scripted -------------------------------------------------------
 
 node {
    def mvnHome = tool name: 'mvn-3.8.4'                                      //def mvn tool "mvn-3.8.4' name mentioned in global tool configuration
