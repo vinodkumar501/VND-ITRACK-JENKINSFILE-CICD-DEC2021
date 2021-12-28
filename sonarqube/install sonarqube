@@ -1,0 +1,69 @@
+First create a vm specific for sonarqube , if you not specify proper h/w it stop to up.
+
+Java is pre-requisiste for sonarqube
+
+https://docs.sonarqube.org/latest/setup/install-server/
+https://www.sonarqube.org/success-download-community-edition/
+
+From sonarqube 7 onwards it need java 11 as pre-requisite
+
+================================== INSTALL JAVA-11 ===============================
+
+INSTALL JAVA-11
+
+sudo amazon-linux-extras install java-openjdk11
+java -version
+
+
+===================================================INSTALL SONARQUBE USINT ZIP FILE ==================================
+Need to install sonarqube as non root user only, otherwie elastisearch will not up.
+
+https://docs.sonarqube.org/latest/setup/install-server/
+https://www.sonarqube.org/success-download-community-edition/
+
+
+Install sonarqube ( https://www.sonarqube.org/downloads/ ) install LTS version
+
+
+#cd /opt  
+#wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.6.50800.zip
+#unzip sonarqube-8.9.6.50800.zip
+
+sonraqube will not run as root user so create user any and assign permission to the unzip folder
+
+#useradd sonaradminvnd
+
+#cd /opt/
+
+#cd sonarqube-8.9.6.50800/
+ls
+#chown -R sonaradminvnd:sonaradminvnd /opt/sonarqube-8.9.6.50800
+#ls
+
+drwxr-xr-x 6 sonaradminvnd sonaradminvnd    94 Dec 20 15:12 bin
+drwxr-xr-x 2 sonaradminvnd sonaradminvnd    50 Dec 20 15:12 conf
+-rw-r--r-- 1 sonaradminvnd sonaradminvnd  7651 Dec 20 15:12 COPYING
+drwxr-xr-x 2 sonaradminvnd sonaradminvnd    24 Dec 20 15:12 data
+-rw-r--r-- 1 sonaradminvnd sonaradminvnd 40615 Dec 20 15:15 dependency-license.json
+drwxr-xr-x 7 sonaradminvnd sonaradminvnd   132 Dec 20 15:31 elasticsearch
+drwxr-xr-x 4 sonaradminvnd sonaradminvnd    40 Dec 20 15:12 extensions
+drwxr-xr-x 6 sonaradminvnd sonaradminvnd   143 Dec 20 15:31 lib
+drwxr-xr-x 2 sonaradminvnd sonaradminvnd    24 Dec 20 15:12 logs
+drwxr-xr-x 2 sonaradminvnd sonaradminvnd    24 Dec 20 15:12 temp
+drwxr-xr-x 6 sonaradminvnd sonaradminvnd  4096 Dec 20 15:31 web
+
+#su - sonaradminvnd
+
+[sonaradminvnd@ip-172-31-10-73 ~]$ ls
+[sonaradminvnd@ip-172-31-10-73 ~]$ cd /opt
+[sonaradminvnd@ip-172-31-10-73 opt]$ ls
+aws  rh  sonarqube-8.9.6.50800  sonarqube-8.9.6.50800.zip
+
+
+$ cd /bin/linux-x86-64/
+$ ./sonar.sh status
+$ ./sonar.sh start
+$ ./sonar.sh status
+
+connect over browser as 
+http://44.201.10.5:9000/
