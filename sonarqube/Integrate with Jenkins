@@ -113,6 +113,9 @@ IF YOU WANT UPDATE PORT ONLY CHANGE THAT BY DEFAULT IT ACCESS 9000 ( EVEN IF COM
 
 ---------------> Once update restart sonarqube <-------------------
 
+[sonaradminvnd@ip-172-31-10-73 home]$ ls
+ec2-user  nexus  sonaradmin  sonaradminvnd
+
 cd /home/sonaradmivnd/sonarqube-9.2.3.50713/bin/linux-x86-64
 [sonaradmivnd@ip-172-31-10-73 linux-x86-64]$ ls
 lib  SonarQube.pid  sonar.sh  wrapper
