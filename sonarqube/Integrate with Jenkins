@@ -18,59 +18,57 @@ https://www.sonarqube.org/success-download-community-edition/
 
 From sonarqube 7 onwards it need java 11 as pre-requisite
 
-==================================  INSTALL JAVA-11 ==========================================
+==================================================================== STEP1 ==============================================
 
-https://tecadmin.net/install-java-on-amazon-linux/
+login with  #  <ip>:9000           <admin/admin>
 
-INSTALL JAVA-11
+Once login --> click select projects -----> manually
 
-sudo amazon-linux-extras install java-openjdk11
-java -version
+name it as "sonarqube-vnd" and create token 
 
+->name it as any like "sonarqube-vnd" and click on generate 
+6cbeb10a90d8cbe7b054110363d0b89c3b5b4a9766777
 
-================================  INSTALL SONARQUBE USING ZIP FILE  ==================================
-Need to install sonarqube as non root user only, otherwie elastisearch will not up.
+Once token is created you can configure in "manage jenkins" and "configure system"
 
-sudo su -
-useradd sonaradminvnd
-passwd sonaradminvnd                       #root/root
+Id: sonarqube-cred
+select kind: secret text and paste token and save
 
-https://docs.sonarqube.org/latest/setup/install-server/
-https://www.sonarqube.org/success-download-community-edition/
+Go to manage Jenkins -->
+Install sonarqube plugin 
 
-1.wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.2.3.50713.zip
-2.unzip sonarqube-9.2.3.50713.zip
-3.mv sonarqube-9.2.3.50713 sonarqube-9
+Go to manage Jenkins --> configure system ->  configure sonarqube
 
-add sudo privileges to sonaradminvnd
-#visudo
+<ip>:9000
 
-root ALL=(ALL)
-sonaradminvnd ALL=(ALL)
-
-[sonaradmivnd@ip-172-31-10-73 ~]$ cd sonarqube-9
-[sonaradmivnd@ip-172-31-10-73 sonarqube-9]$ ls
-bin  conf  COPYING  data  dependency-license.json  elasticsearch  extensions  lib  logs  temp  web
-
-[sonaradmivnd@ip-172-31-10-73 sonarqube-9]$ cd bin/
-[sonaradmivnd@ip-172-31-10-73 bin]$ ls
-jsw-license  linux-x86-64  macosx-universal-64  windows-x86-64
-[sonaradmivnd@ip-172-31-10-73 bin]$ cd linux-x86-64/
-
-[sonaradmivnd@ip-172-31-10-73 linux-x86-64]$ ls
-lib  SonarQube.pid  sonar.sh  wrapper
-
-$pwd
-/home/sonaradmivnd/sonarqube-9/bin/linux-x86-64
-lib  SonarQube.pid  sonar.sh  wrapper
-
-./sonar.sh status
-./sonar.sh start
-./sonar.sh stop
+Name: sonarqube-9
+Server URL: http://3.239.220.22:9000/
+Server authentication token: sonarqube-cred
 
 
-Once up login with below port <ip>:9000
-http://44.201.10.5:9000/                         #admin/admin
+
+------------------------------------------------------- Jenkinsfile -------------------------------------------------------
+
+node {
+   def mvnHome = tool name: 'mvn-3.8.4'                                      //def mvn tool "mvn-3.8.4' name mentioned in global tool configuration
+   stage('checkout git scm') {
+      git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/vnd-itrack-jenkinsfile-CICD-DEC2021.git'
+	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ 
+	   //use this for above git row creation "generate //pipleinscript
+    }
+   stage('package'){
+      sh "${mvnHome}/bin/mvn -v"
+      sh "${mvnHome}/bin/mvn clean package"                                   //you must add "" before interpolation ${mvnHome}
+    }
+   stage('SonarQube analysis') {
+      //def scannerHome = tool 'SonarScanner 4.0';
+      withSonarQubeEnv('sonarqube-9') {                                      // If you have configured more  one global server connection, you specify its name
+      //sh "${scannerHome}/bin/sonar-scanner"                                // Name should be same as -> "manage jenkins" -> "configure system"
+      sh "${mvnHome}/bin/mvn sonar:sonar"
+    }
+  }
+}
+
 
 
 
@@ -134,126 +132,6 @@ SonarQube is running (14071).
 access with <ip>:8000
 
 by default credentials are      --> admin/admin   once login we need to update password   ---> admin/root
-
-======================================================================================================== STEP2 ==============================================
-
-Once login --> click select projects -----> manually
-
-name it as "sonarqube-vnd" and create token 
-
-->name it as any like "sonarqube-vnd" and click on generate 
-6cbeb10a90d8cbe7b054110363d0b89c3b5b4a97
-
-->Run analysis on your project What option best describes your build?
-click on "maven"
-
-Execute the Scanner for Maven
-Running a SonarQube analysis with Maven is straighforward. You just need to run the following command in your project's folder.
-
-mvn clean verify sonar:sonar \
-  -Dsonar.projectKey=sonarqube-vnd \
-  -Dsonar.host.url=http://44.201.10.55:8000 \
-  -Dsonar.login=6cbeb10a90d8cbe7b054110363d0b89c3b5b4a97
-  
-  
-  
-------------------------------------------------------- Jenkinsfile -------------------------------------------------------
-
-node {
-   def mvnHome = tool name: 'mvn-3.8.4'              //def mvn tool "mvn-3.8.4' name mentioned in global tool configuration
-   stage('checkout git scm') {
-      git credentialsId: 'git-cred', url: 'https://github.com/vinodkumar501/vnd-itrack-jenkinsfile-CICD-DEC2021.git'
-	   //http://3.94.101.38:8080/job/declarative%20pipeline/pipeline-syntax/ 
-	   //use this for above git row creation "generate //pipleinscript
-    }
-   stage('package'){
-      sh "${mvnHome}/bin/mvn -v"
-      sh "${mvnHome}/bin/mvn clean package"          //you must add "" before interpolation ${mvnHome}
-    }
-   stage('SonarQube analysis') {
-      //def scannerHome = tool 'SonarScanner 4.0';
-      withSonarQubeEnv('sonarqube-9.2') { // If you have configured more  one global server connection, you specify its name
-      //sh "${scannerHome}/bin/sonar-scanner"
-      sh "${mvnHome}/bin/mvn sonar:sonar"
-    }
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-
-===================================================================================================
-How do you want to analyze your repository?
-click on Jenkins
-
------------------------------- On jenkins install 
-
-SonarQube Scanner
-External Site/Tool Integrations Build Reports
-This plugin allows an easy integration of SonarQube, the open source platform for Continuous Inspection of code quality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
