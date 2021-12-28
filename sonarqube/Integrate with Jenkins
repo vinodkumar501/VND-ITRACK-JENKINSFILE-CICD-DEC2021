@@ -31,6 +31,10 @@ java -version
 ================================  INSTAL SONARQUBE USINT ZIP FILE  ==================================
 Need to install sonarqube as non root user only, otherwie elastisearch will not up.
 
+sudo su -
+useradd sonaradminvnd
+passwd sonaradminvnd                       #root/root
+
 https://docs.sonarqube.org/latest/setup/install-server/
 https://www.sonarqube.org/success-download-community-edition/
 
