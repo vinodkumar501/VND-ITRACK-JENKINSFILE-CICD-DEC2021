@@ -1,3 +1,9 @@
+CICD PIPLELINE STEPS
+https://www.youtube.com/watch?v=f0Rbk1iVhnc&t=1230s
+
+CHECKOUT ---> BUILD --> CODE QUALITY -->NEXUS UPLOAD --> DEV DEPLOY --> SLACK NOTIFY
+
+
 https://www.youtube.com/watch?v=f0Rbk1iVhnc
 https://www.coachdevops.com/2020/03
 
@@ -107,6 +113,14 @@ Note:
 Declarative Pipeline supports an environment directive, whereas users of Scripted Pipeline must use the withEnv step.
 
 ============================================ Sample Jenkinsfile3 ======================================
+
+CICD PIPLELINE STEPS
+https://www.youtube.com/watch?v=f0Rbk1iVhnc&t=1230s
+
+CHECKOUT ---> BUILD --> CODE QUALITY -->NEXUS UPLOAD --> DEV DEPLOY --> SLACK NOTIFY
+
+
+
 //user generate pipeline script
 //http://3.92.207.138:8080/job/script/pipeline-syntax/
 //check pipeline script on bottom we get pipeline syntax --> click on git --> add Url and add cred and click on generate o/p
