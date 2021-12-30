@@ -1,7 +1,7 @@
 CICD PIPLELINE STEPS
 https://www.youtube.com/watch?v=f0Rbk1iVhnc&t=1230s
 
-CHECKOUT ---> BUILD --> CODE QUALITY -->NEXUS UPLOAD --> DEV DEPLOY --> SLACK NOTIFY -->DEV APPROVAL
+CHECKOUT ---> BUILD --> CODE QUALITY -->NEXUS UPLOAD --> DEV DEPLOY --> SLACK NOTIFY -->DEV APPROVAL(MAIL)---> QA DEPLOY -->SLACK NOTIFY
 
 
 https://www.youtube.com/watch?v=f0Rbk1iVhnc
@@ -559,11 +559,17 @@ pipeline {
               //}
         //} 
 		
-        //stage (deploy_to_tomcat) {
+        //stage (deploy_to_dev) {                         #tomcat
            //steps {
               //deploy adapters: [tomcat8(path: '', url: 'http://54.82.235.95:8080/')], contextPath: null, war: '**/*.jar'	
               //}
         //}
+	
+       // stage (slack notification) {
+           //   steps {
+           //     slackSend channel: 'dev', message: 'Deployment is done'
+           //    }
+          // } 
         stage ('DEV Approve') {
           steps {
             mail to: 'vinodkumar.chenna@gmail.com, chvinodgcp501@gmail.com', cc: 'vinodkumarchenna.gspann@gmail.com,chvinodgcp501@gmail.com', subject: "Please approve production deployment for aperture.gspann.com #${env.BUILD_NUMBER}", 
@@ -576,9 +582,20 @@ pipeline {
                 """
                 input submitterParameter: 'userId', message: 'Ready?'
 		}
-           }		
+           }
+        //stage (deploy_to_QA) {                         #tomcat
+           //steps {
+              //deploy adapters: [tomcat8(path: '', url: 'http://54.82.235.95:8080/')], contextPath: null, war: '**/*.jar'	
+              //}
+        //}
+	// stage (slack notification) {
+          //   steps {
+          //     slackSend channel: 'dev', message: 'Deployment is done'
+          //    }
+          // } 
      }
 }
+
 ======================================= git hub actions ============================================
 
 https://www.youtube.com/watch?v=R8_veQiYBjI
