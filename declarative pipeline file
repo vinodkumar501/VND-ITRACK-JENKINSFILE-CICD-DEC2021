@@ -1,7 +1,7 @@
 CICD PIPLELINE STEPS
 https://www.youtube.com/watch?v=f0Rbk1iVhnc&t=1230s
 
-CHECKOUT ---> BUILD --> CODE QUALITY -->NEXUS UPLOAD --> DEV DEPLOY --> SLACK NOTIFY
+CHECKOUT ---> BUILD --> CODE QUALITY -->NEXUS UPLOAD --> DEV DEPLOY --> SLACK NOTIFY -->DEV APPROVAL
 
 
 https://www.youtube.com/watch?v=f0Rbk1iVhnc
