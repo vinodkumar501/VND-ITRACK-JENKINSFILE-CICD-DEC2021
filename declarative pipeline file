@@ -596,22 +596,116 @@ pipeline {
      }
 }
 
-======================================= git hub actions ============================================
+======================================= Env variables ============================================
+http://54.175.195.103:8080/env-vars.html/
+https://www.youtube.com/watch?v=KwQDxwZRZiE
 
-https://www.youtube.com/watch?v=R8_veQiYBjI
+pipeline {
+    agent any
+    stages {
+        stage("list env vars") {
+         steps{
+             sh "printenv"
+         }
+    }
+  }
+}
+
+======================================= ======================================= =======================
+
+O/P:
+
++ printenv
+JENKINS_NODE_COOKIE=356116be-f9e5-4116-ba3b-b18f6f8e75f0
+BUILD_URL=http://54.175.195.103:8080/job/script/99/
+IFS= 	
+
+HUDSON_SERVER_COOKIE=4b72e3714b5cc100
+STAGE_NAME=list env vars
+BUILD_TAG=jenkins-script-99
+JOB_URL=http://54.175.195.103:8080/job/script/
+WORKSPACE=/var/lib/jenkins/workspace/script
+RUN_CHANGES_DISPLAY_URL=http://54.175.195.103:8080/job/script/99/display/redirect?page=changes
+USER=jenkins
+RUN_ARTIFACTS_DISPLAY_URL=http://54.175.195.103:8080/job/script/99/display/redirect?page=artifacts
+JENKINS_HOME=/var/lib/jenkins
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+RUN_DISPLAY_URL=http://54.175.195.103:8080/job/script/99/display/redirect
+_=/bin/printenv
+PWD=/var/lib/jenkins/workspace/script
+HUDSON_URL=http://54.175.195.103:8080/
+LANG=en_US.UTF-8
+JOB_NAME=script
+BUILD_DISPLAY_NAME=#99
+BUILD_ID=99
+JENKINS_URL=http://54.175.195.103:8080/
+JOB_BASE_NAME=script
+RUN_TESTS_DISPLAY_URL=http://54.175.195.103:8080/job/script/99/display/redirect?page=tests
+HOME=/var/lib/jenkins
+SHLVL=3
+CI=true
+WORKSPACE_TMP=/var/lib/jenkins/workspace/script@tmp
+EXECUTOR_NUMBER=1
+JENKINS_SERVER_COOKIE=durable-2531a4e1a9aac3444b62fd5cc9e608956968097a905fa39b2333ca03f328338b
+NODE_LABELS=built-in
+LOGNAME=jenkins
+HUDSON_HOME=/var/lib/jenkins
+NODE_NAME=built-in
+BUILD_NUMBER=99
+JOB_DISPLAY_URL=http://54.175.195.103:8080/job/script/display/redirect
+HUDSON_COOKIE=a4683517-2841-42bd-9501-e2f2484aa543
 
 
 
+================================================= env.BUILD_NUMBER =============================================
+
+pipeline {
+  agent any
+  stages {
+    stage("list env vars") {
+     steps{
+       sh "printenv"
+       }
+      }
+    stage("use env vars") {
+     steps{
+       echo "build_number = ${BUILD_NUMBER}"       // echo "build_number = ${env.BUILD_NUMBER}"   #both same use env for best practice
+       sh "printenv"
+    }
+  }
+ }
+}
 
 
 
+O/P:
+BUILD_NUMBER=102
 
+============================================= SETTING ENV VARIABLES =============================================
 
+pipeline {
+  agent any
+  environment {
+     USER_NAME = "VINOD"
+	 USER_ID = "36"
+   }
+  stages {
+    stage("list env vars") {
+     steps{
+       sh "printenv | sort"
+       }
+      }
+    stage("use env vars") {
+     steps{
+       echo "build_number = ${BUILD_NUMBER}"          //echo "build_number = ${env.BUILD_NUMBER}"   #both same use env for best 
+       sh 'echo build_number = $BUILD_NUMBER'
+	   echo "current user is ${env.USER_NAME}"
+	   echo "current user ID is ${env.USER_ID}"
+    }
+  }
+ }
+}
 
-
-
-
-
-
+============================================ ============================================ ============================================
 
 
