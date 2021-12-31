@@ -631,6 +631,7 @@ pipeline {
 =================================================== POST (SECTION AFTER BUILD SUCCESSFUL ) and Jenkins build custom build name ==============================================================
 //http://54.175.195.103:8080/job/script/pipeline-syntax/globals
 //by default jenkins build will show build number like #21 this now it show "itrack-aperture#21"
+//https://www.youtube.com/watch?v=HBYM0jUBATY&list=PLH1ul2iNXl7uHUaB1iaXf_lHb7tQDh7Tt&index=6
 
 currentBuild.displayName = "itrack-aperture#" + currentBuild.number
 pipeline {
