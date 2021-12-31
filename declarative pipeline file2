@@ -1,1 +1,126 @@
+pipeline is --> flow of appn
+stage in different different node --> use pipeline
+
+
+=============================================================== GIT /GITHUB =====================================================================
+VCS,most popular scm tool 
+store applicatio code ,Docker files , k8s manifest files , Jenkinsfile and may other related files
+
+GIT --> client 
+github,bitbucket,gitlab, azure repos -> SCM 
+
+=============================================================== GREADLE ========================================================================
+
+build automation tool for multi language s/w development
+compile ,package ,testing deployment and publishing
+support languages  java, c++, javascript
+
+Faster than maven and apache ant
+
+============================================================== SONARQUBE ==========================================================
+
+Universal tool for Static code analysis, has become more or less industry standard
+It cover most popular programming languages
+It is the most complex solution that covers most usecases in single appn
+
+===
+Jenkins --> integrate all tools ,powerful plugin
+
+============================================================== Docker ==============================================================
+
+allows user to pack appn with all dependencies into a standard unit
+write a docker file to containerise appn and create a image out of it and push to nexus
+
+==============================================================NEXUS =========================================================
+
+repo manager allows to store and receive build artifactgs
+Use nexus to store dockerfiles and helm charts
+
+============================================================= Kubernetes ==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=============================================================================================================================
+pipeline script
+---------------
+
+get the source code form github.
+build with maven
+create artifact 
+deploying into tomcat
+
+using jenkins pipeline groovy sandbox
+using Jenkinsfile
+
+Jenkinsfile - SCRIPTED - WINDOWS AGENT
+--------------------------------------
+node {
+   def mvnHome
+   stage('getscm') { // for display purposes
+      // Get some code from a GitHub repository
+      git 'https://github.com/ybmadhu/spring3-mv...
+      // Get the Maven tool.
+      // ** NOTE: This 'M3' Maven tool must be configured
+      // **       in the global configuration.           
+      mvnHome = tool 'Maven'
+   }
+   stage('Build') {
+      // Run the maven build
+      if (isUnix()) {
+         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+      } else {
+      echo 'this is build maven artifact'
+         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+      }
+   }
+    stage('artifact') {
+      
+      archive 'target/*.war'
+   }
+   stage ('deploy'){
+   echo 'deployment started'
+       bat '''copy C:\\Users\\Madhu\\.jenkins\\workspace\\kelly_pipeline_java_maven\\target\\*.war F:\\softwares\\apache-tomcat-7.0.53\\webapps\\'''
+   }
+}
+
+
+=============================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
