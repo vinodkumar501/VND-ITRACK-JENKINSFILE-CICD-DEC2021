@@ -9,8 +9,12 @@ https://www.coachdevops.com/2020/03
 
 pipeline {
     agent any
-    tools {
-        maven 'mvn-3.8.4'
+    //tools {
+        //maven 'mvn-3.8.4'                    //automatic install of maven using jenkinsUI use like tools
+    //}
+    environment {
+        PATH = "/opt/maven-3/bin:$PATH"        //manual install of maven download tar file in opt and extract and provide like 
+	                                        //https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
     }
     stages {
         stage ('Compile Stage') {
@@ -153,8 +157,12 @@ pipeline {
 
 pipeline {
     agent any
-    tools {
-      maven 'mvn-3.8.4'
+    //tools {
+        //maven 'mvn-3.8.4'                    //automatic install of maven using jenkinsUI use like tools
+    //}
+    environment {
+        PATH = "/opt/maven-3/bin:$PATH"        //manual install of maven download tar file in opt and extract and provide like 
+	                                        //https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
     }
     stages {
         stage (checkout code) {
@@ -201,8 +209,12 @@ https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-jenkins/
 
 pipeline {
     agent any
-    tools {
-      maven 'mvn-3.8.4'
+    //tools {
+        //maven 'mvn-3.8.4'                    //automatic install of maven using jenkinsUI use like tools
+    //}
+    environment {
+        PATH = "/opt/maven-3/bin:$PATH"        //manual install of maven download tar file in opt and extract and provide like 
+	                                        //https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
     }
     stages {
         stage (checkout) {
@@ -239,8 +251,12 @@ http://3.92.207.138:8080/job/scripted%20pipeline/pipeline-syntax/
 
 pipeline {
     agent any
-    tools {
-      maven 'mvn-3.8.4'
+    //tools {
+        //maven 'mvn-3.8.4'                    //automatic install of maven using jenkinsUI use like tools
+    //}
+    environment {
+        PATH = "/opt/maven-3/bin:$PATH"        //manual install of maven download tar file in opt and extract and provide like 
+	                                        //https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
     }
     stages {
         stage (checkout) {
@@ -313,8 +329,12 @@ artifact id, groupid, type(packaging)
 
 pipeline {
     agent any
-    tools {
-      maven 'mvn-3.8.4'
+    //tools {
+        //maven 'mvn-3.8.4'                    //automatic install of maven using jenkinsUI use like tools
+    //}
+    environment {
+        PATH = "/opt/maven-3/bin:$PATH"        //manual install of maven download tar file in opt and extract and provide like 
+	                                        //https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
     }
     stages {
         stage (checkout) {
@@ -369,8 +389,12 @@ slackSend: send slack message before you need to configure slack with jenkins
 
 pipeline {
     agent any
-    tools {
-      maven 'mvn-3.8.4'
+    //tools {
+        //maven 'mvn-3.8.4'                    //automatic install of maven using jenkinsUI use like tools
+    //}
+    environment {
+        PATH = "/opt/maven-3/bin:$PATH"        //manual install of maven download tar file in opt and extract and provide like 
+	                                        //https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
     }
     stages {
         stage (checkout) {
@@ -475,8 +499,12 @@ https://support.cloudbees.com/hc/en-us/articles/360029265412-How-can-I-approve-a
 
 pipeline {
     agent any
-    tools {
-      maven 'mvn-3.8.4'
+    //tools {
+        //maven 'mvn-3.8.4'                    //automatic install of maven using jenkinsUI use like tools
+    //}
+    environment {
+        PATH = "/opt/maven-3/bin:$PATH"        //manual install of maven download tar file in opt and extract and provide like 
+	                                        //https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
     }
     stages {
         stage (checkout) {
@@ -529,8 +557,12 @@ pipeline {
 
 pipeline {
     agent any
-    tools {
-      maven 'mvn-3.8.4'
+    //tools {
+        //maven 'mvn-3.8.4'                    //automatic install of maven using jenkinsUI use like tools
+    //}
+    environment {
+        PATH = "/opt/maven-3/bin:$PATH"        //manual install of maven download tar file in opt and extract and provide like 
+	                                        //https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
     }
     stages {
         stage (checkout) {
@@ -600,8 +632,12 @@ pipeline {
 
 pipeline {
     agent any
-    tools {
-      maven 'mvn-3.8.4'
+    //tools {
+        //maven 'mvn-3.8.4'                    //automatic install of maven using jenkinsUI use like tools
+    //}
+    environment {
+        PATH = "/opt/maven-3/bin:$PATH"        //manual install of maven download tar file in opt and extract and provide like 
+	                                        //https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
     }
     stages {
         stage (checkout) {
