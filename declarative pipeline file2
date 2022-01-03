@@ -1,3 +1,12 @@
+CI?
+CI is develooment practice where developer will share the code in a common repo frequently , perferably several times in a day 
+each integration  can be automatically verfied by automated build and test 
+
+benefits:
+frequent integrations can detects error quickly and locate more easily
+
+
+
 pipeline is --> flow of appn
 stage in different different node --> use pipeline
 
