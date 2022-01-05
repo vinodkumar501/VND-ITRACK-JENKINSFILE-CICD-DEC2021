@@ -1,0 +1,56 @@
+manage jenkins --> manage nodes and clouds
+newnode --> nodename ________________ slave 
+click on permananent agent
+
+
+node have jave installed
+
+https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04
+sudo apt install default-jdk
+javac -version
+
+goto 
+-->configure global security 
+Agents
+TCP port for inbound agents  --> "random"
+and save
+
+
+slave configuration
+
+Name
+slave
+
+Remote root directory
+/var/vinod
+
+Labels
+slave-vnd
+
+Usage
+use this node as much as possible
+
+Launch method
+launch agent by connecting to controller
+
+click on use "websocket"
+
+Availability
+keep this agent as much as possible
+
+save
+
+goto 
+
+manage jenkins --> manage nodes and clouds-> slave (node name configured)
+download .war  in nodes slave
+
+wget http://54.175.195.103:8080/jnlpJars/agent.jar
+
+java -jar agent.jar -jnlpUrl http://54.175.195.103:8080/computer/slave/jenkins-agent.jnlp -secret fe56e957d21f72983eef54904f40f76cfc3b24c860737f65eb01dd049aeceb6f -workDir "/var/vinod"
+
+
+refresh the node agent 
+
+o/p:
+Agent is connected.
