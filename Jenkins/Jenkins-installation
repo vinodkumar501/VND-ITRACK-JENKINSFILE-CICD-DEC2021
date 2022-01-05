@@ -1,0 +1,178 @@
+//variable
+
+http://34.239.110.188:8080/job/Jenkins-basic-pipeline/pipeline-syntax/globals
+
+Installation steps of Jenkins:  on centos or amazon linux 
+https://github.com/vinodkumar501/ValaxyTech-DevOpsDemos
+
+https://www.jenkins.io/doc/tutorials/tutorial-for-installing-jenkins-on-AWS/
+
+yum update -y
+wget -O /etc/yum.repos.d/jenkins.repo     https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade
+sudo yum install jenkins java-1.8.0-openjdk-devel -y
+(Note: if above fails user below 3 steps)
+sudo yum install epel-release -y  
+(or)  
+sudo amazon-linux-extras install epel   ##( for amazon linux )
+sudo yum install daemonize -y  
+sudo yum install jenkins java-1.8.0-openjdk-devel -y 
+
+sudo systemctl daemon-reload
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+================================================================ERRORS DURING INSTALLATION ================================================================
+Error1:
+sudo yum install jenkins java-1.8.0-openjdk-devel -y
+error:
+[Solved] Error: Package: jenkins-2.303.1-1.1.noarch (jenkins) Requires: daemonize --skip-broken to work
+https://www.unixcloudfusion.in/2021/09/solved-error-package-jenkins-23031.html
+Resolution:
+Daemonize doesn't ship in the default repository thats why yum is not able to resolve it. You will need to install the Daemonize from the Epel repository which is the extra package for enterprise linux as
+
+-----
+Error2:
+yum install epel-release -y  
+
+Error: Nothing to do
+epel-release is available in Amazon Linux Extra topic "epel"
+To use, run
+-->sudo amazon-linux-extras install epel
+
+Error3:
+Starting Jenkins File "/usr/bin/java" is not executable.
+Nov 26 13:54:09 ip-172-31-87-38.ec2.internal jenkins[4037]: [FAILED]
+
+================================================================How to check  or update java path ================================================================
+CCONFIGURE TOOLS 
+
+MANAGE JENKINS -> GLOBAL TOOL CONFIGURATIONS
+
+Manual installation
+JAVA:
+sudo yum install jenkins java-1.8.0-openjdk-devel -y 
+
+readlink -f $(which java)
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.302.b08-0.amzn2.0.1.x86_64/jre/bin/java
+
+or 
+
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.302.b08-0.amzn2.0.1.x86_64
+
+======================================== Java and git path ===========================================
+NAME: JAVA-1.8
+JAVA_PATH:
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.302.b08-0.amzn2.0.1.x86_64/
+
+Manual installation
+GIT:
+NAME: git
+PATH GIT EXECUTABLE : git
+
+yum install git -y
+Set path to git executable. This can be just "git" or complete path.
+
+==============================================Automatic installation ( maven ,gradle , nodejs, docker )================================================================
+
+----------------------------------- MAVEN ----------------------------------
+mvn:
+name : mvn-3.8.4
+
+select install automatically and tick version: 3.8.4
+and save
+you need to mention maven tool details in jenkinsfile
+
+-----------------------------------GRADLE--------------------------------------
+gradle
+name: gradle-7
+select install automatically and tick version: 7.3.2
+
+-----------------------------------NODEJS--------------------------------------
+nodejs
+
+----> install plugin as nodejs
+
+CONFIGURE IN GLOBAL TOOL CONFIGURQTION:
+
+name: node-17.1.0
+select install automatically and tick version : 17.1.0
+Global npm packages to install: yarn
+
+----------------------------------- DOCKER --------------------------------------
+docker
+
+---->Install DOCKER PLUGIN in Jenkins then configure it in 
+
+Manage Jenkins --> Global tool configuration --> Docker --> install automatically (click on ) , select version then save
+
+-------------------------------------> Jenkinsfile <-------------------------------------------
+
+//https://www.youtube.com/watch?v=L9Ite-1pEU8
+//https://medium.com/@gustavo.guss/jenkins-starting-with-pipeline-doing-a-node-js-test-72c6057b67d4
+//https://medium.com/appgambit/ci-cd-pipeline-for-a-nodejs-application-with-jenkins-fa3cc7fad13a
+//https://www.blazemeter.com/blog/how-to-use-the-jenkins-scripted-pipeline
+pipeline {
+   agent any 
+   tools {
+       gradle('gradle-7')     //gradle-7 is the name we mentioned in automatic gradle installation
+   }
+   stages{                                                
+      //stage("cloning git repository"){           ////by default it clone git repo so donot need to mention explicitly
+       //steps{
+         //git 'https://github.com/vinodkumar501/itrack-jenkinsfile-learning-repo.git'
+        //}
+      //}  
+      stage("run frontend"){     //stage any have to provide
+       steps{
+         echo 'executing yarn ..'
+         nodejs('node-17.1.0'){    //node-17.1.0 is the name we mentioned in automatic node installation install nodejs plugin
+         sh 'yarn install'     
+         sh 'npm config ls'
+         sh 'npm -version'
+         sh 'node --version'
+         sh 'yarn -version'
+          }
+        }
+      }
+      stage("run backend"){
+       steps{
+         echo 'executing graddle'
+         sh 'gradle init'
+         sh 'gradle -version'
+         sh 'gradle clean build'
+         //https://docs.gradle.org/current/userguide/jenkins.html
+         //http://tutorials.jenkov.com/gradle/run-gradle.html//gradle commands
+         }
+      }
+   }
+}
+
+
+--------------->Jenkinsfile<-----------------
+pipeline {
+    agent any
+    tools {
+        maven 'mvn-3.8.4'
+    }
+    stages {
+        stage ('Compile Stage') {
+            steps {
+                    sh 'mvn clean compile'
+                }
+            }
+        stage ('Testing Stage') {
+
+            steps {
+                    sh 'mvn test'
+                }
+            }
+        stage ('Deployment Stage') {
+            steps {
+                    sh 'mvn deploy'
+                }
+            }
+        }
+    }
