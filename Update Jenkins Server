@@ -1,0 +1,18 @@
+========================================= jenkins update/upgrade to new version =============================================
+
+https://stackoverflow.com/questions/28692621/update-jenkins-which-is-currently-running-as-a-linux-service
+
+[root@cicdjenkins ~]# locate jenkins.war
+/usr/lib/jenkins/jenkins.war
+
+OR
+
+https://devops81.com/2020/05/16/upgrading-the-jenkins-instance/
+https://jenkins-le-guide-complet.github.io/html/sect-installation-upgrading.html
+
+
+steps:
+1.stop Jenkins server
+2.take backup of jenkins.war file to copy to other location
+3.download war file and place the prev jenkins.war file present
+4.start jenkins server
