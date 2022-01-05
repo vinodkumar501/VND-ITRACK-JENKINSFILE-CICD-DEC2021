@@ -10,6 +10,7 @@ OR
 https://devops81.com/2020/05/16/upgrading-the-jenkins-instance/
 https://jenkins-le-guide-complet.github.io/html/sect-installation-upgrading.html
 
+https://www.jenkins.io/download/
 
 steps:
 1.stop Jenkins server
