@@ -1,0 +1,50 @@
+ISSUE1:
+
+1.MAIL APPROVAL IS FAILING WITH BELOW ERROR
+
+javax.mail.AuthenticationFailedException: 421 4.7.66 TLS 1.0 and 1.1 are not supported. Please upgrade/update your client to support TLS 1.2. Visit https://aka.ms/smtp_auth_tls. [MWHPR22CA0034.namprd22.prod.outlook.com]
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:809)
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:752)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:669)
+	at javax.mail.Service.connect(Service.java:317)
+	at javax.mail.Service.connect(Service.java:176)
+	at javax.mail.Service.connect(Service.java:125)
+	at javax.mail.Transport.send0(Transport.java:194)
+	at javax.mail.Transport.send(Transport.java:124)
+	at org.jenkinsci.plugins.workflow.steps.MailStep$MailStepExecution.run(MailStep.java:142)
+	at org.jenkinsci.plugins.workflow.steps.MailStep$MailStepExecution.run(MailStep.java:128)
+
+
+Jenkins config:
+
+Under
+E-mail Notification
+
+SMTP server   smtp.office365.com
+Default user e-mail suffix @gs123.com
+User Name     vinod@gs123.com
+SMTP Port     587
+
+
+SOLLUTION:
+
+https://medium.com/linuxworld-informatics-pvt-ltd/sending-mail-using-jenkins-plugin-linux-based-ef05ae141194
+
+Issue was fixed after updating the 
+
+vi /etc/sysconfig/jenkins
+
+FROM(previous)
+#JENKINS_JAVA_OPTIONS="-Xmx2048m -XX:MaxPermSize=1024m -Djava.awt.headless=true -Dmail.smtp.starttls.enable=true"
+
+TO(now)
+JENKINS_JAVA_OPTIONS="-Xmx2048m -XX:MaxPermSize=1024m -Djava.awt.headless=true -Dmail.smtp.starttls.enable=true -Dmail.smtp.ssl.protocols=TLSv1.2"
+
+ii.Once updated restart jenkins
+
+systemctl stop jenkins
+systemctl status jenkins
+systemctl start jenkins
+
+and check mail approval working or not using test mail
